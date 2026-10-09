@@ -1,0 +1,84 @@
+[
+  {
+    "product_id": "PKG-120-PRO",
+    "product_name": "CartonPro 1200 Pro Semi-Automatic Carton Sealer",
+    "category": "packaging_equipment",
+    "supplier_id": "SUP-PKG-11",
+    "supplier_name": "PackRight Systems Pvt. Ltd.",
+    "country": "IN",
+    "description": "High-throughput professional carton sealer with extended high-speed drive.",
+    "specs": {
+      "throughput": {
+        "value": 24,
+        "unit": "ctn/min",
+        "raw": "24 ctn/min"
+      },
+      "min_carton_width": {
+        "value": 150,
+        "unit": "mm",
+        "raw": "150 mm"
+      },
+      "max_carton_width": {
+        "value": 550,
+        "unit": "mm",
+        "raw": "550 mm"
+      },
+      "min_carton_height": {
+        "value": 120,
+        "unit": "mm",
+        "raw": "120 mm"
+      },
+      "max_carton_height": {
+        "value": 650,
+        "unit": "mm",
+        "raw": "650 mm"
+      },
+      "tape_width": {
+        "value": "50–80",
+        "unit": "mm",
+        "raw": "50–80 mm"
+      },
+      "power": {
+        "value": 0.45,
+        "unit": "kW",
+        "raw": "0.45 kW"
+      },
+      "voltage": {
+        "value": "230V AC",
+        "unit": "V",
+        "raw": "230V AC single-phase"
+      },
+      "dimensions": {
+        "value": "1000×900×1500",
+        "unit": "mm",
+        "raw": "1000×900×1500 mm"
+      },
+      "mass": {
+        "value": 395,
+        "unit": "kg",
+        "raw": "395 kg"
+      },
+      "price": {
+        "value": 95000,
+        "unit": "INR",
+        "raw": "₹95,000"
+      },
+      "moq": {
+        "value": 1,
+        "unit": "unit",
+        "raw": "1 unit"
+      },
+      "lead_time": {
+        "value": "10–15",
+        "unit": "working_days",
+        "raw": "10–15 working days"
+      },
+      "warranty": {
+        "value": "12 months",
+        "unit": "months",
+        "raw": "12 months all covered parts"
+      }
+    },
+    "source_document": "catalog_confusable.json"
+  }
+]

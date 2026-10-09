@@ -1,0 +1,63 @@
+[
+  {
+    "supplier_id": "SUP-PKG-11",
+    "supplier_name": "PackRight Systems Pvt. Ltd.",
+    "headquarters": "Pune, Maharashtra, India",
+    "country": "IN",
+    "categories": [
+      "packaging_equipment",
+      "packaging_consumable"
+    ],
+    "regions_served": [
+      "India",
+      "UAE"
+    ],
+    "lead_time_notes": "Equipment 10–15 wd; film 4–7 wd",
+    "source_document": "suppliers.json"
+  },
+  {
+    "supplier_id": "SUP-WHS-21",
+    "supplier_name": "Docklane Material Handling",
+    "headquarters": "Bengaluru, Karnataka, India",
+    "country": "IN",
+    "categories": [
+      "warehouse_storage",
+      "warehouse_handling"
+    ],
+    "regions_served": [
+      "India"
+    ],
+    "lead_time_notes": "7–14 wd; installation depends on site",
+    "source_document": "suppliers.json"
+  },
+  {
+    "supplier_id": "SUP-REF-31",
+    "supplier_name": "PolarNest Commercial Cooling",
+    "headquarters": "Ahmedabad, Gujarat, India",
+    "country": "IN",
+    "categories": [
+      "commercial_refrigeration"
+    ],
+    "regions_served": [
+      "India",
+      "Sri Lanka"
+    ],
+    "lead_time_notes": "8–18 wd",
+    "source_document": "suppliers.json"
+  },
+  {
+    "supplier_id": "SUP-TEX-41",
+    "supplier_name": "LoomCraft Industrial Machinery",
+    "headquarters": "Coimbatore, Tamil Nadu, India",
+    "country": "IN",
+    "categories": [
+      "textile_machinery"
+    ],
+    "regions_served": [
+      "India",
+      "UAE"
+    ],
+    "lead_time_notes": "5–10 wd",
+    "source_document": "suppliers.json"
+  }
+]

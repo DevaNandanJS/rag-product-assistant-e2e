@@ -22,6 +22,7 @@ dependencies = [
     "rapidfuzz>=3.10.0",
     "pyyaml>=6.0.2",
     "python-dotenv>=1.0.1",
+    "reportlab>=4.2.5",
 ]
 
 [dependency-groups]
@@ -61,3 +62,8 @@ known-first-party = ["app"]
 minversion = "7.0"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "needs_tesseract: marks tests requiring tesseract binary",
+    "integration: marks end-to-end integration tests",
+]

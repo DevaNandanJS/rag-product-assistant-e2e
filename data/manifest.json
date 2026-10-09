@@ -1,0 +1,1764 @@
+[
+  {
+    "fact_id": "PKG-120_throughput",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.throughput",
+    "value": "18",
+    "unit": "ctn/min",
+    "raw": "18 ctn/min",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "18 ctn/min",
+      "18 cartons/minute",
+      "up to 18 cartons"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_tape_width",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.tape_width",
+    "value": "48–72",
+    "unit": "mm",
+    "raw": "48–72 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "48–72 mm",
+      "48 to 72 mm"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_power",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.power",
+    "value": "0.38",
+    "unit": "kW",
+    "raw": "0.38 kW",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "0.38 kW"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_voltage",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.voltage",
+    "value": "230V AC",
+    "unit": "V",
+    "raw": "230V AC single-phase",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "230V AC",
+      "single-phase"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_dimensions",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.dimensions",
+    "value": "950×850×1450",
+    "unit": "mm",
+    "raw": "950×850×1450 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "950×850×1450 mm"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_mass",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.mass",
+    "value": "370",
+    "unit": "kg",
+    "raw": "370 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "370 kg"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_price",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "78000",
+    "unit": "INR",
+    "raw": "₹78,000",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹78,000",
+      "78,000 INR",
+      "78000"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_moq",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.moq",
+    "value": "1",
+    "unit": "unit",
+    "raw": "1 unit",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1 unit",
+      "MOQ 1"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_lead_time",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.lead_time",
+    "value": "10–15",
+    "unit": "working_days",
+    "raw": "10–15 working days",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "10–15 working days",
+      "10-15 wd"
+    ]
+  },
+  {
+    "fact_id": "PKG-120_warranty",
+    "product_id": "PKG-120",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "6 months",
+    "unit": "months",
+    "raw": "6 months all covered parts",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "6 months"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_throughput",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.throughput",
+    "value": "20",
+    "unit": "loads/hr",
+    "raw": "20 loads/hr",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "20 loads/hr"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_max_load",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.max_load_capacity",
+    "value": "2000",
+    "unit": "kg",
+    "raw": "2000 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "2000 kg"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_pre_stretch",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.pre_stretch",
+    "value": "250",
+    "unit": "%",
+    "raw": "250%",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "250%"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_turntable_dia",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.turntable_diameter",
+    "value": "1650",
+    "unit": "mm",
+    "raw": "1650 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1650 mm"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_power",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.power",
+    "value": "2.2",
+    "unit": "kW",
+    "raw": "2.2 kW",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "2.2 kW"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_voltage",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.voltage",
+    "value": "415V AC",
+    "unit": "V",
+    "raw": "415V AC 3-phase",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "415V AC",
+      "3-phase"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_mass",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.mass",
+    "value": "610",
+    "unit": "kg",
+    "raw": "610 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "610 kg"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_price",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "124000",
+    "unit": "INR",
+    "raw": "₹1,24,000",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹1,24,000",
+      "124000"
+    ]
+  },
+  {
+    "fact_id": "PKG-220_warranty",
+    "product_id": "PKG-220",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "12 months",
+    "unit": "months",
+    "raw": "12 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 months"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_width",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.roll_width",
+    "value": "500",
+    "unit": "mm",
+    "raw": "500 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "500 mm"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_length",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.roll_length",
+    "value": "300",
+    "unit": "m",
+    "raw": "300 m",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "300 m"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_thickness",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.thickness",
+    "value": "23",
+    "unit": "microns",
+    "raw": "23 microns",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "23 microns"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_weight",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.roll_weight",
+    "value": "15",
+    "unit": "kg",
+    "raw": "15 kg/roll",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "15 kg/roll",
+      "15 kg"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_packaging_unit",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.packaging_unit",
+    "value": "12",
+    "unit": "rolls/carton",
+    "raw": "12 rolls/carton",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 rolls/carton"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_price",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "920",
+    "unit": "INR",
+    "raw": "₹920/roll",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹920/roll",
+      "920"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_moq",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.moq",
+    "value": "24",
+    "unit": "rolls",
+    "raw": "24 rolls (2 cartons)",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "24 rolls"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_lead_time",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.lead_time",
+    "value": "4–7",
+    "unit": "working_days",
+    "raw": "4–7 working days",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "4–7 working days"
+    ]
+  },
+  {
+    "fact_id": "PKG-CF48_food_contact",
+    "product_id": "PKG-CF48",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.food_contact_certified",
+    "value": null,
+    "unit": null,
+    "raw": "null",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not certified",
+      "null"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_bay_capacity",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.bay_capacity",
+    "value": "1800",
+    "unit": "kg",
+    "raw": "1800 kg UDL whole bay",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1800 kg",
+      "whole bay"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_shelf_capacity",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.per_shelf_capacity",
+    "value": null,
+    "unit": null,
+    "raw": "Not a per-shelf rating (whole bay only)",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not per shelf",
+      "whole bay rating"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_dimensions",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.bay_dimensions",
+    "value": "2400×1100×4000",
+    "unit": "mm",
+    "raw": "2400×1100×4000 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "2400×1100×4000 mm"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_beam_levels",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.beam_levels",
+    "value": "4",
+    "unit": "levels",
+    "raw": "4 beam levels",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "4 beam levels"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_anchor_bolts",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.anchor_bolts",
+    "value": "sold separately",
+    "unit": null,
+    "raw": "sold separately (required for installation)",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "sold separately",
+      "anchor bolts"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_price",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "36500",
+    "unit": "INR",
+    "raw": "₹36,500/bay",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹36,500",
+      "36500"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_moq",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.moq",
+    "value": "2",
+    "unit": "bays",
+    "raw": "2 bays",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "2 bays"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_warranty",
+    "product_id": "WHS-1800",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "24 months",
+    "unit": "months",
+    "raw": "24 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "24 months"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_load_capacity",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.load_capacity",
+    "value": "1000",
+    "unit": "kg",
+    "raw": "1000 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1000 kg"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_lift_height",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.lift_height",
+    "value": "1600",
+    "unit": "mm",
+    "raw": "1600 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1600 mm"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_fork_length",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.fork_length",
+    "value": "1150",
+    "unit": "mm",
+    "raw": "1150 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "1150 mm"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_mass",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.mass",
+    "value": "215",
+    "unit": "kg",
+    "raw": "215 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "215 kg"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_price",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "48900",
+    "unit": "INR",
+    "raw": "₹48,900",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹48,900",
+      "48900"
+    ]
+  },
+  {
+    "fact_id": "WHS-1000_warranty",
+    "product_id": "WHS-1000",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "12 months",
+    "unit": "months",
+    "raw": "12 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 months"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_load_capacity",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.load_capacity",
+    "value": "400",
+    "unit": "kg",
+    "raw": "400 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "400 kg"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_deck",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.deck_dimensions",
+    "value": "900×600",
+    "unit": "mm",
+    "raw": "900×600 mm steel deck",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "900×600 mm"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_mass",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.mass",
+    "value": "23",
+    "unit": "kg",
+    "raw": "23 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "23 kg"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_price",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "6800",
+    "unit": "INR",
+    "raw": "₹6,800",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹6,800",
+      "6800"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_moq",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.moq",
+    "value": "4",
+    "unit": "units",
+    "raw": "4 units",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "4 units"
+    ]
+  },
+  {
+    "fact_id": "WHS-400_warranty",
+    "product_id": "WHS-400",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "6 months",
+    "unit": "months",
+    "raw": "6 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "6 months"
+    ]
+  },
+  {
+    "fact_id": "REF-320_temperature",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.temperature_range",
+    "value": "-18°C to -24°C",
+    "unit": "°C",
+    "raw": "-18°C to -24°C",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "-18°C to -24°C",
+      "frozen storage"
+    ]
+  },
+  {
+    "fact_id": "REF-320_capacity",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.gross_capacity",
+    "value": "320",
+    "unit": "L",
+    "raw": "320 L gross",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "320 L",
+      "320 litres"
+    ]
+  },
+  {
+    "fact_id": "REF-320_power",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.power",
+    "value": "160",
+    "unit": "W",
+    "raw": "160 W",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "160 W"
+    ]
+  },
+  {
+    "fact_id": "REF-320_voltage",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.voltage",
+    "value": "230V 50Hz",
+    "unit": "V",
+    "raw": "230V 50Hz",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "230V 50Hz"
+    ]
+  },
+  {
+    "fact_id": "REF-320_refrigerant",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.refrigerant",
+    "value": "R600a",
+    "unit": null,
+    "raw": "R600a",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "R600a"
+    ]
+  },
+  {
+    "fact_id": "REF-320_defrost",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.defrost_type",
+    "value": "manual",
+    "unit": null,
+    "raw": "manual defrost",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "manual defrost"
+    ]
+  },
+  {
+    "fact_id": "REF-320_price",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "28900",
+    "unit": "INR",
+    "raw": "₹28,900",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹28,900",
+      "28900"
+    ]
+  },
+  {
+    "fact_id": "REF-320_warranty_compressor",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty_compressor",
+    "value": "24 months",
+    "unit": "months",
+    "raw": "24 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "24 months",
+      "compressor warranty"
+    ]
+  },
+  {
+    "fact_id": "REF-320_warranty_parts",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty_parts",
+    "value": "12 months",
+    "unit": "months",
+    "raw": "12 months other parts",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 months",
+      "other parts"
+    ]
+  },
+  {
+    "fact_id": "REF-320_daily_energy",
+    "product_id": "REF-320",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.daily_energy_kwh",
+    "value": null,
+    "unit": null,
+    "raw": "null",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not specified",
+      "null",
+      "not provided"
+    ]
+  },
+  {
+    "fact_id": "REF-700_temperature",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.temperature_range",
+    "value": "+2°C to +8°C",
+    "unit": "°C",
+    "raw": "+2°C to +8°C",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "+2°C to +8°C",
+      "chilled display",
+      "not a freezer"
+    ]
+  },
+  {
+    "fact_id": "REF-700_capacity",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.gross_capacity",
+    "value": "700",
+    "unit": "L",
+    "raw": "700 L gross",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "700 L",
+      "700 litres"
+    ]
+  },
+  {
+    "fact_id": "REF-700_cooling",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.cooling_type",
+    "value": "forced-air",
+    "unit": null,
+    "raw": "forced-air cooling",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "forced-air"
+    ]
+  },
+  {
+    "fact_id": "REF-700_power",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.power",
+    "value": "650",
+    "unit": "W",
+    "raw": "650 W",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "650 W"
+    ]
+  },
+  {
+    "fact_id": "REF-700_refrigerant",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.refrigerant",
+    "value": "R290",
+    "unit": null,
+    "raw": "R290",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "R290"
+    ]
+  },
+  {
+    "fact_id": "REF-700_shelves",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.shelves",
+    "value": "5",
+    "unit": "shelves",
+    "raw": "5 adjustable shelves",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "5 adjustable shelves",
+      "5 shelves"
+    ]
+  },
+  {
+    "fact_id": "REF-700_dimensions",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.dimensions",
+    "value": "800×740×2050",
+    "unit": "mm",
+    "raw": "800×740×2050 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "800×740×2050 mm"
+    ]
+  },
+  {
+    "fact_id": "REF-700_mass",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.mass",
+    "value": "118",
+    "unit": "kg",
+    "raw": "118 kg",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "118 kg"
+    ]
+  },
+  {
+    "fact_id": "REF-700_price",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "74500",
+    "unit": "INR",
+    "raw": "₹74,500",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹74,500",
+      "74500"
+    ]
+  },
+  {
+    "fact_id": "REF-700_warranty_compressor",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty_compressor",
+    "value": "24 months",
+    "unit": "months",
+    "raw": "24 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "24 months",
+      "compressor warranty"
+    ]
+  },
+  {
+    "fact_id": "REF-700_warranty_parts",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty_parts",
+    "value": "12 months",
+    "unit": "months",
+    "raw": "12 months other parts",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 months",
+      "other parts"
+    ]
+  },
+  {
+    "fact_id": "REF-700_medical_grade",
+    "product_id": "REF-700",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.medical_grade_certified",
+    "value": null,
+    "unit": null,
+    "raw": "null",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not medical-grade",
+      "null"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_speed",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.speed",
+    "value": "4500",
+    "unit": "stitches/min",
+    "raw": "4500 stitches/min",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "4500 stitches/min",
+      "4,500 stitches/min"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_stitch_length",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.max_stitch_length",
+    "value": "5",
+    "unit": "mm",
+    "raw": "≤5 mm",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "≤5 mm",
+      "5 mm"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_needle",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.needle_system",
+    "value": "DB×1",
+    "unit": null,
+    "raw": "DB×1 needle",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "DB×1"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_motor",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.motor_type",
+    "value": "550 W servo motor",
+    "unit": null,
+    "raw": "550 W servo motor",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "550 W",
+      "servo motor"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_table_included",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.table_stand_included",
+    "value": "true",
+    "unit": null,
+    "raw": "included",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "table and stand included"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_feet_included",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.extra_presser_feet_included",
+    "value": "false",
+    "unit": null,
+    "raw": "not included",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not included",
+      "extra presser feet"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_price",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "29800",
+    "unit": "INR",
+    "raw": "₹29,800",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹29,800",
+      "29800"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_warranty",
+    "product_id": "TEX-12",
+    "supplier_id": null,
+    "bulletin_id": null,
+    "field": "specs.warranty",
+    "value": "12 months",
+    "unit": "months",
+    "raw": "12 months",
+    "document": "catalog.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "12 months"
+    ]
+  },
+  {
+    "fact_id": "SUP-PKG-11_name",
+    "product_id": null,
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "supplier_name",
+    "value": "PackRight Systems Pvt. Ltd.",
+    "unit": null,
+    "raw": "PackRight Systems Pvt. Ltd.",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "PackRight Systems"
+    ]
+  },
+  {
+    "fact_id": "SUP-PKG-11_hq",
+    "product_id": null,
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "headquarters",
+    "value": "Pune, Maharashtra, India",
+    "unit": null,
+    "raw": "Pune, Maharashtra, India",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "Pune"
+    ]
+  },
+  {
+    "fact_id": "SUP-PKG-11_regions",
+    "product_id": null,
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "regions_served",
+    "value": "India, UAE",
+    "unit": null,
+    "raw": "India, UAE",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "India",
+      "UAE"
+    ]
+  },
+  {
+    "fact_id": "SUP-WHS-21_name",
+    "product_id": null,
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": null,
+    "field": "supplier_name",
+    "value": "Docklane Material Handling",
+    "unit": null,
+    "raw": "Docklane Material Handling",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "Docklane Material Handling"
+    ]
+  },
+  {
+    "fact_id": "SUP-WHS-21_hq",
+    "product_id": null,
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": null,
+    "field": "headquarters",
+    "value": "Bengaluru, Karnataka, India",
+    "unit": null,
+    "raw": "Bengaluru, Karnataka, India",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "Bengaluru"
+    ]
+  },
+  {
+    "fact_id": "SUP-REF-31_name",
+    "product_id": null,
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": null,
+    "field": "supplier_name",
+    "value": "PolarNest Commercial Cooling",
+    "unit": null,
+    "raw": "PolarNest Commercial Cooling",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "PolarNest Commercial Cooling"
+    ]
+  },
+  {
+    "fact_id": "SUP-REF-31_hq",
+    "product_id": null,
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": null,
+    "field": "headquarters",
+    "value": "Ahmedabad, Gujarat, India",
+    "unit": null,
+    "raw": "Ahmedabad, Gujarat, India",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "Ahmedabad"
+    ]
+  },
+  {
+    "fact_id": "SUP-TEX-41_name",
+    "product_id": null,
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": null,
+    "field": "supplier_name",
+    "value": "LoomCraft Industrial Machinery",
+    "unit": null,
+    "raw": "LoomCraft Industrial Machinery",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "LoomCraft Industrial Machinery"
+    ]
+  },
+  {
+    "fact_id": "SUP-TEX-41_hq",
+    "product_id": null,
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": null,
+    "field": "headquarters",
+    "value": "Coimbatore, Tamil Nadu, India",
+    "unit": null,
+    "raw": "Coimbatore, Tamil Nadu, India",
+    "document": "suppliers.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "Coimbatore"
+    ]
+  },
+  {
+    "fact_id": "PR-TECH-07_erect_cartons",
+    "product_id": "PKG-120",
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": "PR-TECH-07",
+    "field": "advisory.carton_erecting",
+    "value": "does not erect cartons",
+    "unit": null,
+    "raw": "It does not erect cartons.",
+    "document": "bulletins/PR-TECH-07.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "does not erect cartons",
+      "not erect cartons"
+    ]
+  },
+  {
+    "fact_id": "PR-TECH-07_tape_included",
+    "product_id": "PKG-120",
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": "PR-TECH-07",
+    "field": "advisory.tape_included",
+    "value": "tape not included",
+    "unit": null,
+    "raw": "Tape is not included unless listed on the purchase order.",
+    "document": "bulletins/PR-TECH-07.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "tape is not included"
+    ]
+  },
+  {
+    "fact_id": "WHS-SAFE-04_bay_vs_shelf",
+    "product_id": "WHS-1800",
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": "WHS-SAFE-04",
+    "field": "advisory.load_rating",
+    "value": "entire bay UDL",
+    "unit": null,
+    "raw": "The WHS-1800 rating is 1,800 kg UDL for the entire bay. It is not a per-shelf rating.",
+    "document": "bulletins/WHS-SAFE-04.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "entire bay",
+      "not a per-shelf rating"
+    ]
+  },
+  {
+    "fact_id": "WHS-SAFE-04_anchor_bolts",
+    "product_id": "WHS-1800",
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": "WHS-SAFE-04",
+    "field": "advisory.anchor_bolts",
+    "value": "sold separately",
+    "unit": null,
+    "raw": "Anchor bolts are required and sold separately.",
+    "document": "bulletins/WHS-SAFE-04.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "anchor bolts are required and sold separately"
+    ]
+  },
+  {
+    "fact_id": "POLAR-OPS-02_temperatures",
+    "product_id": "REF-700",
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": "POLAR-OPS-02",
+    "field": "advisory.temperatures",
+    "value": "+2°C to +8°C",
+    "unit": "°C",
+    "raw": "REF-700 is a chilled display unit documented at +2°C to +8°C.",
+    "document": "bulletins/POLAR-OPS-02.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "chilled display",
+      "+2°C to +8°C"
+    ]
+  },
+  {
+    "fact_id": "POLAR-OPS-02_medical_grade",
+    "product_id": "REF-700",
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": "POLAR-OPS-02",
+    "field": "advisory.medical_grade",
+    "value": "not medical-grade",
+    "unit": null,
+    "raw": "REF-700 is not described as medical-grade equipment.",
+    "document": "bulletins/POLAR-OPS-02.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "not described as medical-grade"
+    ]
+  },
+  {
+    "fact_id": "LOOM-TECH-03_fabric_scope",
+    "product_id": "TEX-12",
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": "LOOM-TECH-03",
+    "field": "advisory.fabric_scope",
+    "value": "medium-weight woven only",
+    "unit": null,
+    "raw": "TEX-12 is a straight lockstitch machine for medium-weight woven fabric. It is not an embroidery machine and is not specified for heavy leather work.",
+    "document": "bulletins/LOOM-TECH-03.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "medium-weight woven fabric",
+      "not an embroidery machine",
+      "not specified for heavy leather"
+    ]
+  },
+  {
+    "fact_id": "LOOM-TECH-03_table_included",
+    "product_id": "TEX-12",
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": "LOOM-TECH-03",
+    "field": "advisory.table_included",
+    "value": "table and stand included",
+    "unit": null,
+    "raw": "The table and stand are included; extra presser feet are not included.",
+    "document": "bulletins/LOOM-TECH-03.md",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "table and stand are included",
+      "extra presser feet are not included"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_scanned_capacity",
+    "product_id": "WHS-1800",
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": null,
+    "field": "specs.bay_capacity",
+    "value": "1800",
+    "unit": "kg",
+    "raw": "1,800 kg UDL whole bay",
+    "document": "WHS-1800_scanned.pdf",
+    "page": 1,
+    "requires_ocr": true,
+    "search_strings": [
+      "1,800 kg UDL",
+      "whole bay"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_scanned_dimensions",
+    "product_id": "WHS-1800",
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": null,
+    "field": "specs.bay_dimensions",
+    "value": "2400×1100×4000",
+    "unit": "mm",
+    "raw": "2,400 × 1,100 × 4,000 mm",
+    "document": "WHS-1800_scanned.pdf",
+    "page": 1,
+    "requires_ocr": true,
+    "search_strings": [
+      "2,400 × 1,100 × 4,000 mm"
+    ]
+  },
+  {
+    "fact_id": "WHS-1800_scanned_anchors",
+    "product_id": "WHS-1800",
+    "supplier_id": "SUP-WHS-21",
+    "bulletin_id": null,
+    "field": "specs.anchor_bolts",
+    "value": "sold separately",
+    "unit": null,
+    "raw": "Anchor bolts are required for safe operation and are SOLD SEPARATELY",
+    "document": "WHS-1800_scanned.pdf",
+    "page": 2,
+    "requires_ocr": true,
+    "search_strings": [
+      "SOLD SEPARATELY",
+      "anchor bolts"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_scanned_speed",
+    "product_id": "TEX-12",
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": null,
+    "field": "specs.speed",
+    "value": "4500",
+    "unit": "stitches/min",
+    "raw": "4,500 stitches/min",
+    "document": "TEX-12_scanned.pdf",
+    "page": 1,
+    "requires_ocr": true,
+    "search_strings": [
+      "4,500 stitches/min"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_scanned_motor",
+    "product_id": "TEX-12",
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": null,
+    "field": "specs.motor_type",
+    "value": "550 W",
+    "unit": "W",
+    "raw": "550 W direct-drive servo motor",
+    "document": "TEX-12_scanned.pdf",
+    "page": 1,
+    "requires_ocr": true,
+    "search_strings": [
+      "550 W",
+      "servo motor"
+    ]
+  },
+  {
+    "fact_id": "TEX-12_scanned_table",
+    "product_id": "TEX-12",
+    "supplier_id": "SUP-TEX-41",
+    "bulletin_id": null,
+    "field": "specs.table_stand_included",
+    "value": "true",
+    "unit": null,
+    "raw": "Table and stand included",
+    "document": "TEX-12_scanned.pdf",
+    "page": 1,
+    "requires_ocr": true,
+    "search_strings": [
+      "Table and stand included"
+    ]
+  },
+  {
+    "fact_id": "REF-320_plate_temp",
+    "product_id": "REF-320",
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": null,
+    "field": "specs.temperature_range",
+    "value": "-18°C to -24°C",
+    "unit": "°C",
+    "raw": "-18°C to -24°C",
+    "document": "REF-320_spec_plate.png",
+    "page": null,
+    "requires_ocr": true,
+    "search_strings": [
+      "-18°C to -24°C"
+    ]
+  },
+  {
+    "fact_id": "REF-320_plate_power",
+    "product_id": "REF-320",
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": null,
+    "field": "specs.power",
+    "value": "160",
+    "unit": "W",
+    "raw": "160 W",
+    "document": "REF-320_spec_plate.png",
+    "page": null,
+    "requires_ocr": true,
+    "search_strings": [
+      "160 W"
+    ]
+  },
+  {
+    "fact_id": "REF-320_plate_refrigerant",
+    "product_id": "REF-320",
+    "supplier_id": "SUP-REF-31",
+    "bulletin_id": null,
+    "field": "specs.refrigerant",
+    "value": "R600a",
+    "unit": null,
+    "raw": "R600a",
+    "document": "REF-320_spec_plate.png",
+    "page": null,
+    "requires_ocr": true,
+    "search_strings": [
+      "R600a"
+    ]
+  },
+  {
+    "fact_id": "PKG-120-PRO_throughput",
+    "product_id": "PKG-120-PRO",
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "specs.throughput",
+    "value": "24",
+    "unit": "ctn/min",
+    "raw": "24 ctn/min",
+    "document": "catalog_confusable.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "24 ctn/min"
+    ]
+  },
+  {
+    "fact_id": "PKG-120-PRO_tape_width",
+    "product_id": "PKG-120-PRO",
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "specs.tape_width",
+    "value": "50–80",
+    "unit": "mm",
+    "raw": "50–80 mm",
+    "document": "catalog_confusable.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "50–80 mm"
+    ]
+  },
+  {
+    "fact_id": "PKG-120-PRO_price",
+    "product_id": "PKG-120-PRO",
+    "supplier_id": "SUP-PKG-11",
+    "bulletin_id": null,
+    "field": "specs.price",
+    "value": "95000",
+    "unit": "INR",
+    "raw": "₹95,000",
+    "document": "catalog_confusable.json",
+    "page": null,
+    "requires_ocr": false,
+    "search_strings": [
+      "₹95,000",
+      "95000"
+    ]
+  }
+]
