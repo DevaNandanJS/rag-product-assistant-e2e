@@ -57,7 +57,7 @@
 Feed the agent **one phase at a time**. Do not supply the entire document in a single prompt context. Use this execution prompt:
 
 ```text
-You are an autonomous AI Engineer implementing the Filumart RAG Product Assistant.
+You are an autonomous AI Engineer implementing the Filumart RAG Product Assistant.we follow C:\filumart_rag_project\docs\BUILD_GUIDE.md as guide to complete it
 1. Strictly review Sections 2 (Rules), 4 (Architecture), 5 (Schemas), 6 (Layout), and 10 (Config).
 2. Read Phase N in Section 8 completely.
 3. Implement all steps belonging strictly to Phase N. Adhere to the single-responsibility principles in Section 4.2.
