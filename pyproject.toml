@@ -1,16 +1,63 @@
 [project]
 name = "filumart-rag-project"
 version = "0.1.0"
-requires-python = ">=3.10"
+description = "Filumart B2B Product Knowledge Assistant"
+requires-python = ">=3.11"
+readme = "README.md"
 dependencies = [
-    "fastapi>=0.143.0",
-    "pydantic-settings>=2.15.0",
-    "uvicorn[standard]>=0.54.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.31.0",
+    "sse-starlette>=2.1.3",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.5.2",
+    "httpx>=0.27.2",
+    "openai>=1.51.0",
+    "qdrant-client>=1.11.3",
+    "fastembed>=0.3.6",
+    "pymupdf>=1.24.11",
+    "pytesseract>=0.3.13",
+    "pillow>=10.4.0",
+    "numpy>=1.26.4",
+    "opencv-python-headless>=4.10.0.84",
+    "rapidfuzz>=3.10.0",
+    "pyyaml>=6.0.2",
+    "python-dotenv>=1.0.1",
 ]
 
 [dependency-groups]
 dev = [
-    "httpx>=0.28.1",
-    "pytest>=9.1.1",
-    "ruff>=0.16.10",
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.6.9",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+    ".git",
+    ".venv",
+    "docs",
+    "data",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = [
+    "UP017",  # Keep datetime.timezone.utc for Python 3.10 runtime compatibility
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]

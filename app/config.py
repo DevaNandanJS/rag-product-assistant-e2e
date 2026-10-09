@@ -1,15 +1,5 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-class settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra= "ignore")
+"""Compatibility shim forwarding to app.core.config."""
 
-    # secrets 
-    gemini_api_key= ""
-    groq_api_key= ""
+from app.core.config import Settings, get_settings, settings
 
-    # RAG Parameters 
-    chunk_size: int= 500
-    chunk_overlap: int= 75
-    top_k: int= 5
-    score_threshold: float= 0.3
-
-settings= settings()
+__all__ = ["Settings", "get_settings", "settings"]
