@@ -117,6 +117,76 @@ def run_test(args: list[str]) -> int:
     return pytest.main(pytest_args)
 
 
+def run_ingest(args: argparse.Namespace) -> int:
+    """Runs ingestion pipeline over DATA_DIR using selected chunker."""
+    from app.core.config import get_settings
+    from app.ingestion.chunkers.tokens import get_token_counter
+    from app.ingestion.indexer import Indexer
+    from app.ingestion.normalize import DocumentNormalizer
+    from app.retrieval.embedder import FastEmbedEmbedder
+    from app.retrieval.store import QdrantStore
+
+    settings = get_settings()
+
+    # Initialize OCR engine if available
+    ocr_engine = None
+    try:
+        from app.ingestion.ocr.tesseract import TesseractEngine
+
+        ocr_engine = TesseractEngine(
+            cmd_path=settings.TESSERACT_CMD or "",
+            lang=settings.OCR_LANG,
+        )
+    except Exception as exc:
+        print(f"[INFO] Tesseract engine not active ({exc}); using fallback/native text extraction.")
+
+    normalizer = DocumentNormalizer(
+        ocr_engine=ocr_engine,
+        ocr_dpi=settings.OCR_DPI,
+        ocr_conf_threshold=settings.OCR_CONF_THRESHOLD,
+        ocr_min_text_chars=settings.OCR_MIN_TEXT_CHARS,
+    )
+
+    embedder = FastEmbedEmbedder(
+        model_name=settings.EMBEDDING_MODEL,
+        cache_dir=settings.FASTEMBED_CACHE_PATH,
+    )
+    store = QdrantStore(settings=settings, embedder=embedder)
+    counter = get_token_counter(
+        model_name=settings.EMBEDDING_MODEL,
+        cache_dir=settings.FASTEMBED_CACHE_PATH,
+    )
+
+    indexer = Indexer(
+        normalizer=normalizer,
+        store=store,
+        counter=counter,
+        chunker=args.chunker,
+        target_tokens=settings.CHUNK_TARGET_TOKENS,
+        max_tokens=480,
+    )
+
+    print(f"\nStarting ingestion with chunker '{args.chunker}' over '{settings.DATA_DIR}'...")
+    try:
+        report = indexer.ingest_all(
+            data_dir=settings.DATA_DIR,
+            if_empty=args.if_empty,
+            rebuild=args.rebuild,
+        )
+        print(report.summary_table())
+        return 0
+    except Exception as exc:
+        from app.core.errors import VectorDBError
+
+        if isinstance(exc, VectorDBError):
+            print(f"\n[VECTOR DB ERROR] {exc.message}")
+            if settings.QDRANT_MODE == "server":
+                print("Tip: Qdrant server is unreachable at " + settings.QDRANT_URL)
+                print("     Set QDRANT_MODE=local or QDRANT_MODE=memory in .env to run without Docker.")
+            return 1
+        raise
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="filumart",
@@ -131,7 +201,7 @@ def main() -> None:
     test_parser = subparsers.add_parser("test", help="Run pytest test suite")
     test_parser.add_argument("pytest_args", nargs="*", help="Arguments forwarded to pytest")
 
-    # Command: ingest (stub)
+    # Command: ingest
     ingest_parser = subparsers.add_parser("ingest", help="Ingest catalog and documentation")
     ingest_parser.add_argument("--chunker", choices=["structured", "fixed"], default="structured")
     ingest_parser.add_argument("--if-empty", action="store_true")
@@ -150,12 +220,15 @@ def main() -> None:
         sys.exit(run_check())
     elif parsed.command == "test":
         sys.exit(run_test(parsed.pytest_args + remaining))
-    elif parsed.command in ("ingest", "eval", "serve"):
+    elif parsed.command == "ingest":
+        sys.exit(run_ingest(parsed))
+    elif parsed.command in ("eval", "serve"):
         print(f"Command '{parsed.command}' will be registered in its respective build phase.")
         sys.exit(0)
     else:
         parser.print_help()
         sys.exit(1)
+
 
 
 if __name__ == "__main__":

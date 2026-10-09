@@ -56,7 +56,10 @@ class TesseractEngine:
         cmd_path: str = "",
         lang: str = "eng",
         config: str = "--psm 6",
+        tesseract_cmd: str | None = None,
     ) -> None:
+        if tesseract_cmd:
+            cmd_path = tesseract_cmd
         if not _TESSERACT_AVAILABLE:
             raise ImportError(
                 "pytesseract is not installed. "
