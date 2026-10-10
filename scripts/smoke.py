@@ -53,7 +53,11 @@ def test_ask_stream(base_url: str, question: str = "What is the CartonPro 1200?"
     req = urllib.request.Request(
         stream_url,
         data=payload,
-        headers={"Content-Type": "application/json", "Accept": "text/event-stream"},
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream",
+            "Connection": "keep-alive",
+        },
         method="POST",
     )
 
@@ -65,19 +69,18 @@ def test_ask_stream(base_url: str, question: str = "What is the CartonPro 1200?"
         if resp.status != 200:
             raise RuntimeError(f"Unexpected status code {resp.status} from /ask/stream")
 
-        buffer = ""
         current_event = None
-        for chunk in resp:
-            line = chunk.decode("utf-8")
-            buffer += line
-            while "\n\n" in buffer:
-                block, buffer = buffer.split("\n\n", 1)
-                for line_part in block.splitlines():
-                    line_part = line_part.strip()
-                    if line_part.startswith("event:"):
-                        current_event = line_part[len("event:") :].strip()
-                    elif line_part.startswith("data:"):
-                        pass
+        for raw_line in resp:
+            line = raw_line.decode("utf-8").strip()
+            if line.startswith("event:"):
+                current_event = line[len("event:") :].strip()
+            elif line.startswith("data:"):
+                event_name = current_event or "message"
+                events_received.append(event_name)
+                if event_name == "done":
+                    has_done_event = True
+                current_event = None
+            elif not line:
                 if current_event:
                     events_received.append(current_event)
                     if current_event == "done":

@@ -25,10 +25,11 @@ COPY scripts ./scripts
 COPY frontend ./frontend
 COPY data ./data
 COPY eval ./eval
+COPY main.py .
 COPY docker/entrypoint.sh /entrypoint.sh
 
 # Fix line endings and permissions on entrypoint
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 
 # Pre-download and bake embedding/reranker models into Docker layer (Rule R2)
 RUN python -m app.cli download-models

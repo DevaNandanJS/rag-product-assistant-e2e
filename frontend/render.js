@@ -94,7 +94,10 @@ export function appendAssistantMessage(threadElement) {
      * Called on each incoming token chunk.
      */
     updateToken(token) {
-      accumulatedText += token;
+      const tokenStr = typeof token === 'object' && token !== null
+        ? (token.content ?? token.token ?? '')
+        : String(token ?? '');
+      accumulatedText += tokenStr;
       // Progressive display: sanitize & render markdown so user sees formatted output
       bubble.innerHTML = renderMarkdown(accumulatedText);
       attachCitationListeners(bubble, sourcesContainer);

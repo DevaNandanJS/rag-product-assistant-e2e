@@ -147,9 +147,13 @@ function parseAndDispatchFrame(frame, callbacks) {
     case 'debug':
       callbacks.onDebug?.(data);
       break;
-    case 'token':
-      callbacks.onToken?.(typeof data === 'object' && data.token !== undefined ? data.token : data);
+    case 'token': {
+      const tokenText = typeof data === 'object' && data !== null
+        ? (data.content !== undefined ? data.content : (data.token !== undefined ? data.token : ''))
+        : String(data ?? '');
+      callbacks.onToken?.(tokenText);
       break;
+    }
     case 'sources':
       callbacks.onSources?.(data.sources || (Array.isArray(data) ? data : []));
       break;

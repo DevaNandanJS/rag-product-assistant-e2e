@@ -507,45 +507,6 @@ def run_eval_gate(args: argparse.Namespace) -> int:
     return 0
 
 
-def run_download_models() -> int:
-    """Pre-download and cache embedding and reranker models."""
-    from app.core.config import get_settings
-
-    settings = get_settings()
-    print(f"Pre-downloading models into '{settings.FASTEMBED_CACHE_PATH}'...")
-
-    try:
-        from fastembed import SparseTextEmbedding, TextEmbedding
-
-        print(f"1. Downloading dense model: {settings.EMBEDDING_MODEL}...")
-        TextEmbedding(
-            model_name=settings.EMBEDDING_MODEL,
-            cache_dir=settings.FASTEMBED_CACHE_PATH,
-        )
-        print("2. Downloading sparse model: Qdrant/bm25...")
-        SparseTextEmbedding(
-            model_name="Qdrant/bm25",
-            cache_dir=settings.FASTEMBED_CACHE_PATH,
-        )
-    except Exception as exc:
-        print(f"[ERROR] Failed downloading FastEmbed models: {exc}")
-        return 1
-
-    if settings.RERANKER_MODEL:
-        try:
-            from app.retrieval.rerank import CrossEncoderReranker
-
-            print(f"3. Downloading reranker model: {settings.RERANKER_MODEL}...")
-            CrossEncoderReranker(
-                model_name=settings.RERANKER_MODEL,
-                cache_dir=settings.FASTEMBED_CACHE_PATH,
-            )
-        except Exception as exc:
-            print(f"[WARN] Failed downloading reranker model: {exc}")
-
-    print("[OK] All models downloaded and cached successfully.")
-    return 0
-
 
 def run_ask(args: argparse.Namespace) -> int:
     """Query the grounded generation assistant from the command line."""
@@ -787,12 +748,13 @@ def run_download_models() -> int:
             )
             dummy_chunk = Chunk(
                 chunk_id="warmup",
-                document_id="doc",
-                content="warmup content",
-                product_id="P1",
-                category="cat",
-                doc_type="text",
-                source_path="path",
+                point_id="00000000-0000-0000-0000-000000000000",
+                text="warmup content",
+                display_text="warmup content",
+                chunk_type="spec",
+                document="catalog.json",
+                source_type="structured",
+                token_count=2,
             )
             reranker.rerank("warmup query", [dummy_chunk], top_k=1)
             print(f"[OK] Reranker model '{settings.RERANKER_MODEL}' initialized.")

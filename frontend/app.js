@@ -223,8 +223,11 @@ import {
           render.renderDebugDrawer(debugData);
         },
         onToken: (token) => {
-          fullAnswer += token;
-          streamUI.updateToken(token);
+          const tokenStr = typeof token === 'object' && token !== null
+            ? (token.content ?? token.token ?? '')
+            : String(token ?? '');
+          fullAnswer += tokenStr;
+          streamUI.updateToken(tokenStr);
         },
         onSources: (sources) => {
           streamUI.setSources(sources);

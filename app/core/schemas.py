@@ -2,9 +2,9 @@
 Covers domain models, chunk contracts, API requests, and response models.
 """
 
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # ---------------------------------------------------------------------------
 # 1. Canonical Domain Models (Multi-Category B2B Catalogs)
@@ -103,7 +103,13 @@ class Filters(BaseModel):
 
 
 class AskRequest(BaseModel):
-    """Request payload for /ask and /ask/stream endpoints."""
+    """Request payload for /ask and /ask/stream endpoints.
+
+    Accepts both 'question' and 'query' field names for seamless compatibility
+    with the assessment specification (Section 10).
+    """
+
+    model_config = ConfigDict(populate_by_name=True)
 
     question: str = Field(..., min_length=1, max_length=1000)
     filters: Filters | None = None
@@ -111,6 +117,14 @@ class AskRequest(BaseModel):
     threshold: float | None = Field(default=None, ge=0.0, le=1.0)
     history: list[dict[str, str]] | None = Field(default=None, max_length=6)
     debug: bool = False
+
+    @model_validator(mode="before")
+    @classmethod
+    def populate_question_from_query(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if not data.get("question") and data.get("query"):
+                data["question"] = data["query"]
+        return data
 
 
 class SourceItem(BaseModel):
