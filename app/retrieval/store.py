@@ -366,3 +366,33 @@ class QdrantStore:
             )
         ]
 
+    def scroll_unique_values(
+        self, field: str, chunker: str | None = None, limit: int = 500
+    ) -> list[str]:
+        """Scroll collection to find distinct non-null string values for a payload field."""
+        col_name = self.collection_name(chunker)
+        if not self.collection_exists(col_name):
+            return []
+        seen: set[str] = set()
+        offset = None
+        try:
+            while True:
+                results, next_offset = self.client.scroll(
+                    collection_name=col_name,
+                    limit=100,
+                    offset=offset,
+                    with_payload=[field],
+                )
+                for pt in results:
+                    val = (pt.payload or {}).get(field)
+                    if isinstance(val, str) and val.strip():
+                        seen.add(val.strip())
+                if next_offset is None or len(seen) >= limit:
+                    break
+                offset = next_offset
+            return sorted(seen)
+        except Exception as exc:
+            logger.warning("Error scrolling unique values for '%s': %s", field, exc)
+            return sorted(seen)
+
+

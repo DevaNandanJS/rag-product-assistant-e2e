@@ -520,6 +520,29 @@ def run_ask(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_serve(args: argparse.Namespace) -> int:
+    """Start the FastAPI application via Uvicorn."""
+    import uvicorn
+    from app.core.config import get_settings
+
+    settings = get_settings()
+    host = getattr(args, "host", None) or settings.HOST
+    port = int(getattr(args, "port", None) or settings.PORT)
+    reload = bool(getattr(args, "reload", False))
+
+    print(f"Starting Filumart RAG Assistant on http://{host}:{port}")
+    uvicorn.run(
+        "app.api.app:create_app",
+        host=host,
+        port=port,
+        factory=True,
+        reload=reload,
+        log_level=settings.LOG_LEVEL.lower(),
+        timeout_graceful_shutdown=5,
+    )
+    return 0
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="filumart",
@@ -606,8 +629,17 @@ def main() -> None:
         "download-models", help="Pre-download and cache embedding/reranker models"
     )
 
-    # Command: serve (stub)
-    subparsers.add_parser("serve", help="Start FastAPI Uvicorn server")
+    # Command: serve
+    serve_parser = subparsers.add_parser("serve", help="Start FastAPI Uvicorn server")
+    serve_parser.add_argument(
+        "--host", type=str, default=None, help="Host to bind (default from config)"
+    )
+    serve_parser.add_argument(
+        "--port", type=int, default=None, help="Port to bind (default from config)"
+    )
+    serve_parser.add_argument(
+        "--reload", action="store_true", help="Enable hot reload"
+    )
 
     parsed, remaining = parser.parse_known_args()
 
@@ -628,8 +660,7 @@ def main() -> None:
     elif parsed.command == "download-models":
         sys.exit(run_download_models())
     elif parsed.command == "serve":
-        print(f"Command '{parsed.command}' will be registered in its respective build phase.")
-        sys.exit(0)
+        sys.exit(run_serve(parsed))
     else:
         parser.print_help()
         sys.exit(1)
@@ -637,5 +668,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
