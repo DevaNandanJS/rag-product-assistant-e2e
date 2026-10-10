@@ -5,7 +5,8 @@ and idempotent document upsert/replacement.
 from __future__ import annotations
 
 import logging
-from typing import Sequence
+from collections.abc import Sequence
+from typing import Any
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
@@ -23,7 +24,13 @@ from qdrant_client.models import (
 from app.core.config import Settings
 from app.core.errors import VectorDBError
 from app.core.schemas import Chunk
-from app.retrieval.embedder import Embedder
+from app.retrieval.embedder import (
+    Embedder,
+    FakeEmbedder,
+    FakeSparseEmbedder,
+    FastEmbedSparseEmbedder,
+    SparseEmbedder,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +38,22 @@ logger = logging.getLogger(__name__)
 class QdrantStore:
     """Manages Qdrant vector storage, collection creation, and document updates."""
 
-    def __init__(self, settings: Settings, embedder: Embedder) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        embedder: Embedder,
+        sparse_embedder: SparseEmbedder | None = None,
+    ) -> None:
         self.settings = settings
         self.embedder = embedder
+        if sparse_embedder is not None:
+            self.sparse_embedder = sparse_embedder
+        elif isinstance(embedder, FakeEmbedder):
+            self.sparse_embedder = FakeSparseEmbedder()
+        else:
+            self.sparse_embedder = FastEmbedSparseEmbedder(
+                cache_dir=settings.FASTEMBED_CACHE_PATH
+            )
         self.client = self._init_client()
 
     def _init_client(self) -> QdrantClient:
@@ -51,7 +71,8 @@ class QdrantStore:
         except Exception as exc:
             if isinstance(exc, VectorDBError):
                 raise
-            raise VectorDBError(f"Failed to initialize QdrantClient in mode '{mode}': {exc}") from exc
+            msg = f"Failed to initialize QdrantClient in mode '{mode}': {exc}"
+            raise VectorDBError(msg) from exc
 
     def collection_name(self, chunker: str | None = None) -> str:
         """Derive standard collection name matching configuration and chunker type."""
@@ -97,7 +118,7 @@ class QdrantStore:
                 "source_type",
             )
             with warnings.catch_warnings():
-                warnings.filterwarnings("ignore", category=UserWarning, module="qdrant_client")
+                warnings.filterwarnings("ignore", category=UserWarning)
                 for field in payload_fields:
                     self.client.create_payload_index(
                         collection_name=col_name,
@@ -140,14 +161,15 @@ class QdrantStore:
             # Batch embed chunk text representations
             texts = [c.text for c in chunks]
             vectors = self.embedder.embed(texts)
+            sparse_vectors = self.sparse_embedder.embed(texts)
 
             # Build PointStruct items
             points: list[PointStruct] = []
-            for chunk, vec in zip(chunks, vectors):
+            for chunk, vec, s_vec in zip(chunks, vectors, sparse_vectors, strict=True):
                 points.append(
                     PointStruct(
                         id=chunk.point_id,
-                        vector={"dense": vec},
+                        vector={"dense": vec, "sparse": s_vec},
                         payload=chunk.model_dump(),
                     )
                 )
@@ -174,7 +196,8 @@ class QdrantStore:
         try:
             return self.client.count(collection_name=col_name).count
         except Exception as exc:
-            raise VectorDBError(f"Failed to count points in collection '{col_name}': {exc}") from exc
+            msg = f"Failed to count points in collection '{col_name}': {exc}"
+            raise VectorDBError(msg) from exc
 
     def delete_collection(self, chunker: str | None = None) -> None:
         """Delete collection if it exists."""
@@ -184,3 +207,162 @@ class QdrantStore:
                 self.client.delete_collection(collection_name=col_name)
             except Exception as exc:
                 raise VectorDBError(f"Failed deleting collection '{col_name}': {exc}") from exc
+
+    def _build_filter(self, filters: Filter | dict[str, Any] | None) -> Filter | None:
+        """Construct Qdrant Filter from dict or return existing Filter."""
+        if filters is None:
+            return None
+        if isinstance(filters, Filter):
+            return filters
+        if not isinstance(filters, dict):
+            return None
+        conditions = [
+            FieldCondition(key=str(k), match=MatchValue(value=v))
+            for k, v in filters.items()
+        ]
+        return Filter(must=conditions) if conditions else None
+
+    def dense_search_with_scores(
+        self,
+        query_vector: Sequence[float],
+        top_k: int = 5,
+        chunker: str | None = None,
+        filters: Filter | dict[str, Any] | None = None,
+    ) -> list[tuple[Chunk, float]]:
+        """Perform dense vector search, returning (Chunk, similarity_score) pairs.
+
+        Args:
+            query_vector: Dense embedding vector for the query.
+            top_k: Maximum number of points to retrieve.
+            chunker: Chunker name (e.g., 'fixed', 'structured') or None for configured default.
+            filters: Optional Qdrant Filter or dict of keyword field-matches.
+
+        Returns:
+            List of (Chunk, score) tuples in descending similarity order.
+        """
+        col_name = self.collection_name(chunker)
+        if not self.collection_exists(col_name):
+            logger.warning("Search called on nonexistent collection '%s'.", col_name)
+            return []
+
+        try:
+            vec = list(query_vector)
+            query_filter = self._build_filter(filters)
+            try:
+                res = self.client.query_points(
+                    collection_name=col_name,
+                    query=vec,
+                    using="dense",
+                    limit=top_k,
+                    query_filter=query_filter,
+                    with_payload=True,
+                )
+                scored_points = res.points
+            except Exception:
+                scored_points = self.client.search(
+                    collection_name=col_name,
+                    query_vector=("dense", vec),
+                    limit=top_k,
+                    query_filter=query_filter,
+                    with_payload=True,
+                )
+
+            results: list[tuple[Chunk, float]] = []
+            for point in scored_points:
+                if point.payload:
+                    chunk = Chunk.model_validate(point.payload)
+                    score = float(point.score) if point.score is not None else 0.0
+                    results.append((chunk, score))
+            return results
+        except Exception as exc:
+            raise VectorDBError(
+                f"Dense search failed in collection '{col_name}': {exc}"
+            ) from exc
+
+    def dense_search(
+        self,
+        query_vector: Sequence[float],
+        top_k: int = 5,
+        chunker: str | None = None,
+        filters: Filter | dict[str, Any] | None = None,
+    ) -> list[Chunk]:
+        """Perform dense vector search returning matching Chunk instances."""
+        return [
+            chunk
+            for chunk, _ in self.dense_search_with_scores(
+                query_vector, top_k, chunker, filters=filters
+            )
+        ]
+
+    def sparse_search_with_scores(
+        self,
+        query_text: str,
+        top_k: int = 5,
+        chunker: str | None = None,
+        filters: Filter | dict[str, Any] | None = None,
+    ) -> list[tuple[Chunk, float]]:
+        """Perform sparse BM25 vector search, returning (Chunk, sparse_score) pairs.
+
+        Args:
+            query_text: Query text to tokenize into sparse BM25 vector.
+            top_k: Maximum number of points to retrieve.
+            chunker: Chunker name or None for configured default.
+            filters: Optional Qdrant Filter or dict of keyword field-matches.
+
+        Returns:
+            List of (Chunk, score) tuples in descending score order.
+        """
+        col_name = self.collection_name(chunker)
+        if not self.collection_exists(col_name):
+            logger.warning("Search called on nonexistent collection '%s'.", col_name)
+            return []
+
+        try:
+            sparse_vec = self.sparse_embedder.query_embed(query_text)
+            query_filter = self._build_filter(filters)
+            try:
+                res = self.client.query_points(
+                    collection_name=col_name,
+                    query=sparse_vec,
+                    using="sparse",
+                    limit=top_k,
+                    query_filter=query_filter,
+                    with_payload=True,
+                )
+                scored_points = res.points
+            except Exception:
+                scored_points = self.client.search(
+                    collection_name=col_name,
+                    query_vector=("sparse", sparse_vec),
+                    limit=top_k,
+                    query_filter=query_filter,
+                    with_payload=True,
+                )
+
+            results: list[tuple[Chunk, float]] = []
+            for point in scored_points:
+                if point.payload:
+                    chunk = Chunk.model_validate(point.payload)
+                    score = float(point.score) if point.score is not None else 0.0
+                    results.append((chunk, score))
+            return results
+        except Exception as exc:
+            raise VectorDBError(
+                f"Sparse search failed in collection '{col_name}': {exc}"
+            ) from exc
+
+    def sparse_search(
+        self,
+        query_text: str,
+        top_k: int = 5,
+        chunker: str | None = None,
+        filters: Filter | dict[str, Any] | None = None,
+    ) -> list[Chunk]:
+        """Perform sparse vector search returning matching Chunk instances."""
+        return [
+            chunk
+            for chunk, _ in self.sparse_search_with_scores(
+                query_text, top_k, chunker, filters=filters
+            )
+        ]
+

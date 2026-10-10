@@ -1,0 +1,599 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "category": "direct_factual",
+    "question": "What is the maximum throughput of the PKG-120 carton sealer?",
+    "answerable": true,
+    "reference_answer": "The PKG-120 carton sealer has a maximum throughput of 18 cartons/minute.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "18 ctn/min"
+      }
+    ]
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "category": "direct_factual",
+    "question": "What is the rated load capacity of the WHS-1800 pallet racking system?",
+    "answerable": true,
+    "reference_answer": "The WHS-1800 has a rated capacity of 1,800 kg UDL per bay.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "1800 kg"
+      }
+    ]
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "category": "direct_factual",
+    "question": "What operating temperature range is specified for the REF-700 display chiller?",
+    "answerable": true,
+    "reference_answer": "The REF-700 operates between +2°C and +8°C.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "+2°C to +8°C"
+      }
+    ]
+  },
+  {
+    "id": "q04",
+    "split": "dev",
+    "category": "direct_factual",
+    "question": "What motor type and wattage powers the TEX-12 sewing machine?",
+    "answerable": true,
+    "reference_answer": "The TEX-12 is equipped with a 550 W servo motor.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "550 W servo motor"
+      }
+    ]
+  },
+  {
+    "id": "q05",
+    "split": "holdout",
+    "category": "direct_factual",
+    "question": "What tape widths are compatible with the PKG-120 CartonPro 1200?",
+    "answerable": true,
+    "reference_answer": "The PKG-120 is compatible with tape widths of 48–72 mm.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "48–72 mm"
+      }
+    ]
+  },
+  {
+    "id": "q06",
+    "split": "holdout",
+    "category": "direct_factual",
+    "question": "What is the maximum lifting height of the WHS-1000 stacker?",
+    "answerable": true,
+    "reference_answer": "The WHS-1000 has a maximum lift height of 3000 mm.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "3000 mm"
+      }
+    ]
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "category": "semantic_paraphrase",
+    "question": "Which machine can automatically tape cardboard shipping boxes shut?",
+    "answerable": true,
+    "reference_answer": "The PKG-120 CartonPro 1200 is designed to seal cartons with adhesive tape.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "carton sealer"
+      }
+    ]
+  },
+  {
+    "id": "q08",
+    "split": "dev",
+    "category": "semantic_paraphrase",
+    "question": "What storage equipment should we purchase to hold heavy warehouse pallets up to 1.8 tons?",
+    "answerable": true,
+    "reference_answer": "The WHS-1800 StackStore heavy-duty pallet racking system supports 1,800 kg per bay.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "StackStore 1800"
+      }
+    ]
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "category": "semantic_paraphrase",
+    "question": "Do you offer a manual hydraulic truck for shifting pallets across the factory floor?",
+    "answerable": true,
+    "reference_answer": "The WHS-400 MoveEase 400 is a manual hydraulic pallet truck with a 2,500 kg capacity.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "pallet truck"
+      }
+    ]
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "category": "semantic_paraphrase",
+    "question": "Which commercial freezer unit maintains sub-zero temperatures down to minus twenty-four degrees?",
+    "answerable": true,
+    "reference_answer": "The REF-320 FrostHarbor CF320 commercial chest freezer operates between -18°C and -24°C.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "-18°C to -24°C"
+      }
+    ]
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "category": "semantic_paraphrase",
+    "question": "Can the StitchPro machine stitch heavy leather goods or embroidery patterns?",
+    "answerable": true,
+    "reference_answer": "No, LOOM-TECH-03 clarifies that the TEX-12 is for medium-weight woven fabric only, not embroidery or heavy leather.",
+    "evidence": [
+      {
+        "document": "bulletins/LOOM-TECH-03.md",
+        "page": null,
+        "key_fact": "medium-weight woven fabric"
+      }
+    ]
+  },
+  {
+    "id": "q12",
+    "split": "holdout",
+    "category": "semantic_paraphrase",
+    "question": "Is the REF-700 suitable for preserving vaccines or medical samples?",
+    "answerable": true,
+    "reference_answer": "No, bulletin POLAR-OPS-02 states the REF-700 is not described as medical-grade equipment.",
+    "evidence": [
+      {
+        "document": "bulletins/POLAR-OPS-02.md",
+        "page": null,
+        "key_fact": "not described as medical-grade"
+      }
+    ]
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "category": "cross_product_comparison",
+    "question": "Compare the WHS-1000 stacker and WHS-400 pallet truck by load capacity and unit price.",
+    "answerable": true,
+    "reference_answer": "The WHS-1000 has a 1,000 kg capacity priced at ₹1,45,000, while the WHS-400 has a 2,500 kg capacity priced at ₹18,500.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "1000 kg"
+      },
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "2500 kg"
+      }
+    ]
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "category": "cross_product_comparison",
+    "question": "Compare the PKG-120 and PKG-220 stretch wrapper in terms of power requirement and warranty.",
+    "answerable": true,
+    "reference_answer": "The PKG-120 uses 0.38 kW with a 6-month warranty, whereas the PKG-220 uses 1.2 kW with a 12-month warranty.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "0.38 kW"
+      },
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "1.2 kW"
+      }
+    ]
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "category": "cross_product_comparison",
+    "question": "How do the REF-320 and REF-700 differ in temperature range and refrigerant type?",
+    "answerable": true,
+    "reference_answer": "The REF-320 operates at -18°C to -24°C with R600a, while the REF-700 operates at +2°C to +8°C with R290.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "R600a"
+      },
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "R290"
+      }
+    ]
+  },
+  {
+    "id": "q16",
+    "split": "holdout",
+    "category": "cross_product_comparison",
+    "question": "Compare the standard PKG-120 with the PKG-120-PRO variant in throughput and compatible tape width.",
+    "answerable": true,
+    "reference_answer": "PKG-120 has 18 ctn/min throughput and 48–72 mm tape width, while PKG-120-PRO achieves 24 ctn/min with 50–80 mm tape width.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "18 ctn/min"
+      },
+      {
+        "document": "catalog_confusable.json",
+        "page": null,
+        "key_fact": "24 ctn/min"
+      }
+    ]
+  },
+  {
+    "id": "q17",
+    "split": "dev",
+    "category": "multi_doc_relational",
+    "question": "Which supplier manufactures the LiftMate 1000 and where are their headquarters located?",
+    "answerable": true,
+    "reference_answer": "The LiftMate 1000 is supplied by Docklane Material Handling (SUP-WHS-21), headquartered in Bengaluru, Karnataka, India.",
+    "evidence": [
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "Docklane Material Handling"
+      },
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "Bengaluru"
+      }
+    ]
+  },
+  {
+    "id": "q18",
+    "split": "dev",
+    "category": "multi_doc_relational",
+    "question": "Does the PKG-120 carton sealer erect cardboard boxes automatically, and who is its supplier?",
+    "answerable": true,
+    "reference_answer": "According to PR-TECH-07, it does not erect cartons. It is supplied by PackRight Systems Pvt. Ltd.",
+    "evidence": [
+      {
+        "document": "bulletins/PR-TECH-07.md",
+        "page": null,
+        "key_fact": "does not erect cartons"
+      },
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "PackRight Systems"
+      }
+    ]
+  },
+  {
+    "id": "q19",
+    "split": "dev",
+    "category": "multi_doc_relational",
+    "question": "Are anchor bolts included with the WHS-1800 rack, and what does bulletin WHS-SAFE-04 warn about loading?",
+    "answerable": true,
+    "reference_answer": "Anchor bolts are sold separately, and WHS-SAFE-04 clarifies that the 1,800 kg rating is for the entire bay UDL, not per shelf.",
+    "evidence": [
+      {
+        "document": "bulletins/WHS-SAFE-04.md",
+        "page": null,
+        "key_fact": "entire bay"
+      },
+      {
+        "document": "bulletins/WHS-SAFE-04.md",
+        "page": null,
+        "key_fact": "sold separately"
+      }
+    ]
+  },
+  {
+    "id": "q20",
+    "split": "holdout",
+    "category": "multi_doc_relational",
+    "question": "Which regions are served by LoomCraft Industrial Machinery, the supplier of the TEX-12?",
+    "answerable": true,
+    "reference_answer": "LoomCraft Industrial Machinery is based in Coimbatore and serves India, Bangladesh, and Sri Lanka.",
+    "evidence": [
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "LoomCraft Industrial Machinery"
+      },
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "Coimbatore"
+      }
+    ]
+  },
+  {
+    "id": "q21",
+    "split": "dev",
+    "category": "metadata_filtered",
+    "question": "Which refrigeration product operates at sub-zero frozen temperatures?",
+    "answerable": true,
+    "reference_answer": "The REF-320 FrostHarbor CF320 operates at frozen temperatures of -18°C to -24°C.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "-18°C to -24°C"
+      }
+    ]
+  },
+  {
+    "id": "q22",
+    "split": "dev",
+    "category": "metadata_filtered",
+    "question": "Find packaging equipment supplied by PackRight Systems Pvt. Ltd. with a power rating below 0.5 kW.",
+    "answerable": true,
+    "reference_answer": "The PKG-120 CartonPro 1200 has a power rating of 0.38 kW and is supplied by PackRight Systems.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "0.38 kW"
+      }
+    ]
+  },
+  {
+    "id": "q23",
+    "split": "dev",
+    "category": "metadata_filtered",
+    "question": "Which warehouse equipment category product offers a 24-month warranty?",
+    "answerable": true,
+    "reference_answer": "The WHS-1800 pallet racking system comes with a 24-month warranty.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "24 months"
+      }
+    ]
+  },
+  {
+    "id": "q24",
+    "split": "holdout",
+    "category": "metadata_filtered",
+    "question": "Which textile machinery product is priced under ₹35,000?",
+    "answerable": true,
+    "reference_answer": "The TEX-12 StitchPro ST-12 is priced at ₹29,800.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "29800"
+      }
+    ]
+  },
+  {
+    "id": "q25",
+    "split": "dev",
+    "category": "unanswerable_offtopic",
+    "question": "What is the maximum flight range and battery life of the SkyDrone 500 aerial surveillance system?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q26",
+    "split": "dev",
+    "category": "unanswerable_offtopic",
+    "question": "How many horsepower does the Caterpillar D8T bulldozer engine produce?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q27",
+    "split": "dev",
+    "category": "unanswerable_offtopic",
+    "question": "What are the dosage instructions for 500mg amoxicillin capsules?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q28",
+    "split": "holdout",
+    "category": "unanswerable_offtopic",
+    "question": "What is the maximum printing resolution in DPI of the Epson SureColor P9000 plotter?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q29",
+    "split": "dev",
+    "category": "unanswerable_missing",
+    "question": "What is the daily kilowatt-hour (kWh) electrical energy consumption of the REF-320 chest freezer?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q30",
+    "split": "dev",
+    "category": "unanswerable_missing",
+    "question": "What is the decibel noise emission level (dBA) of the PKG-120 during continuous operation?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q31",
+    "split": "dev",
+    "category": "unanswerable_missing",
+    "question": "Does the WHS-1000 electric stacker have an explosion-proof ATEX zone 1 rating?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q32",
+    "split": "holdout",
+    "category": "unanswerable_missing",
+    "question": "What is the IP water ingress protection rating of the TEX-12 control panel?",
+    "answerable": false,
+    "reference_answer": "Not documented in the provided knowledge base.",
+    "evidence": []
+  },
+  {
+    "id": "q33",
+    "split": "dev",
+    "category": "ocr_only",
+    "question": "According to the scanned datasheet, what is the whole bay load rating of the WHS-1800?",
+    "answerable": true,
+    "reference_answer": "The scanned datasheet states a 1,800 kg UDL whole bay rating.",
+    "evidence": [
+      {
+        "document": "WHS-1800_scanned.pdf",
+        "page": 1,
+        "key_fact": "1,800 kg UDL"
+      }
+    ]
+  },
+  {
+    "id": "q34",
+    "split": "dev",
+    "category": "ocr_only",
+    "question": "What max sewing speed is stated on the scanned documentation of the TEX-12?",
+    "answerable": true,
+    "reference_answer": "The TEX-12 scanned documentation states a speed of 4,500 stitches/min.",
+    "evidence": [
+      {
+        "document": "TEX-12_scanned.pdf",
+        "page": 1,
+        "key_fact": "4,500 stitches/min"
+      }
+    ]
+  },
+  {
+    "id": "q35",
+    "split": "dev",
+    "category": "ocr_only",
+    "question": "What power rating and refrigerant are stamped on the REF-320 compressor specification plate?",
+    "answerable": true,
+    "reference_answer": "The REF-320 spec plate indicates 160 W power and R600a refrigerant.",
+    "evidence": [
+      {
+        "document": "REF-320_spec_plate.png",
+        "page": null,
+        "key_fact": "160 W"
+      },
+      {
+        "document": "REF-320_spec_plate.png",
+        "page": null,
+        "key_fact": "R600a"
+      }
+    ]
+  },
+  {
+    "id": "q36",
+    "split": "holdout",
+    "category": "ocr_only",
+    "question": "What requirement regarding anchor bolts is printed on page 2 of the scanned WHS-1800 manual?",
+    "answerable": true,
+    "reference_answer": "Page 2 of the scanned manual notes that anchor bolts are SOLD SEPARATELY and required for safe operation.",
+    "evidence": [
+      {
+        "document": "WHS-1800_scanned.pdf",
+        "page": 2,
+        "key_fact": "SOLD SEPARATELY"
+      }
+    ]
+  },
+  {
+    "id": "q37",
+    "split": "dev",
+    "category": "exact_code_search",
+    "question": "Which industrial machine specifies DBx1 needle systems?",
+    "answerable": true,
+    "reference_answer": "The TEX-12 StitchPro ST-12 uses DB×1 needle systems.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "DB×1"
+      }
+    ]
+  },
+  {
+    "id": "q38",
+    "split": "dev",
+    "category": "exact_code_search",
+    "question": "What product corresponds to supplier code SUP-PKG-11 and model identifier PKG-120?",
+    "answerable": true,
+    "reference_answer": "PKG-120 is the CartonPro 1200 semi-automatic carton sealer from PackRight Systems (SUP-PKG-11).",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "CartonPro 1200"
+      }
+    ]
+  },
+  {
+    "id": "q39",
+    "split": "dev",
+    "category": "exact_code_search",
+    "question": "What product uses 2400×1100×4000 mm bay dimensions?",
+    "answerable": true,
+    "reference_answer": "The WHS-1800 StackStore 1800 pallet racking system uses 2400×1100×4000 mm bay dimensions.",
+    "evidence": [
+      {
+        "document": "catalog.json",
+        "page": null,
+        "key_fact": "2400×1100×4000"
+      }
+    ]
+  },
+  {
+    "id": "q40",
+    "split": "holdout",
+    "category": "exact_code_search",
+    "question": "Which supplier code is assigned to PolarNest Commercial Cooling?",
+    "answerable": true,
+    "reference_answer": "PolarNest Commercial Cooling is assigned supplier code SUP-REF-31.",
+    "evidence": [
+      {
+        "document": "suppliers.json",
+        "page": null,
+        "key_fact": "SUP-REF-31"
+      }
+    ]
+  }
+]

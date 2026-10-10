@@ -1,0 +1,10 @@
+run_id: "B1"
+description: "Ablation B1: Structured Chunks + Context Headers with dense retrieval"
+chunker: "structured"
+retrieval_mode: "dense"
+top_k: 5
+candidates: 20
+gate_enabled: false
+reranker: ""
+split: "dev"
+entity_boost: false

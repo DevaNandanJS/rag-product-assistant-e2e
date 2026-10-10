@@ -1,0 +1,641 @@
+{
+  "run_id": "B0",
+  "config": {
+    "run_id": "B0",
+    "description": "Baseline: Fixed 500-token chunks, dense-only retrieval, top-5, no reranker, gate disabled",
+    "chunker": "fixed",
+    "retrieval_mode": "dense",
+    "top_k": 5,
+    "candidates": 20,
+    "gate_enabled": false,
+    "reranker": "",
+    "split": "dev"
+  },
+  "split": "dev",
+  "overall": {
+    "mean_recall_at_k": 0.25,
+    "mrr": 0.25,
+    "hit_rate": 0.25,
+    "mean_precision_at_k": 0.0583,
+    "ndcg_at_k": 0.2115,
+    "count": 24
+  },
+  "by_category": {
+    "direct_factual": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 4
+    },
+    "semantic_paraphrase": {
+      "mean_recall_at_k": 0.6,
+      "mrr": 0.6,
+      "hit_rate": 0.6,
+      "mean_precision_at_k": 0.12,
+      "ndcg_at_k": 0.6,
+      "count": 5
+    },
+    "cross_product_comparison": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    },
+    "multi_doc_relational": {
+      "mean_recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "mean_precision_at_k": 0.2667,
+      "ndcg_at_k": 0.6922,
+      "count": 3
+    },
+    "metadata_filtered": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    },
+    "unanswerable_offtopic": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    },
+    "unanswerable_missing": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    },
+    "ocr_only": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    },
+    "exact_code_search": {
+      "mean_recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "mean_precision_at_k": 0.0,
+      "ndcg_at_k": 0.0,
+      "count": 3
+    }
+  },
+  "per_query": [
+    {
+      "query_id": "q01",
+      "category": "direct_factual",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q02",
+      "category": "direct_factual",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q03",
+      "category": "direct_factual",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q04",
+      "category": "direct_factual",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q07",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.2,
+      "ndcg_at_k": 1.0
+    },
+    {
+      "query_id": "q08",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.2,
+      "ndcg_at_k": 1.0
+    },
+    {
+      "query_id": "q09",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q10",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q11",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.2,
+      "ndcg_at_k": 1.0
+    },
+    {
+      "query_id": "q13",
+      "category": "cross_product_comparison",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q14",
+      "category": "cross_product_comparison",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q15",
+      "category": "cross_product_comparison",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q17",
+      "category": "multi_doc_relational",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.2,
+      "ndcg_at_k": 0.6131471927654584
+    },
+    {
+      "query_id": "q18",
+      "category": "multi_doc_relational",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.4,
+      "ndcg_at_k": 0.8503449055347546
+    },
+    {
+      "query_id": "q19",
+      "category": "multi_doc_relational",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "hit_rate": 1.0,
+      "precision_at_k": 0.2,
+      "ndcg_at_k": 0.6131471927654584
+    },
+    {
+      "query_id": "q21",
+      "category": "metadata_filtered",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q22",
+      "category": "metadata_filtered",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q23",
+      "category": "metadata_filtered",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q25",
+      "category": "unanswerable_offtopic",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q26",
+      "category": "unanswerable_offtopic",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q27",
+      "category": "unanswerable_offtopic",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q29",
+      "category": "unanswerable_missing",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q30",
+      "category": "unanswerable_missing",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q31",
+      "category": "unanswerable_missing",
+      "split": "dev",
+      "answerable": false,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q33",
+      "category": "ocr_only",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q34",
+      "category": "ocr_only",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q35",
+      "category": "ocr_only",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q37",
+      "category": "exact_code_search",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q38",
+      "category": "exact_code_search",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    },
+    {
+      "query_id": "q39",
+      "category": "exact_code_search",
+      "split": "dev",
+      "answerable": true,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "hit_rate": 0.0,
+      "precision_at_k": 0.0,
+      "ndcg_at_k": 0.0
+    }
+  ],
+  "retrieved_chunk_ids": {
+    "q01": [
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "catalog.json_FIX_000",
+      "POLAR-OPS-02.md_FIX_000"
+    ],
+    "q02": [
+      "WHS-SAFE-04.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "catalog.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q03": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q04": [
+      "LOOM-TECH-03.md_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "suppliers.json_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q07": [
+      "catalog.json_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "suppliers.json_FIX_000"
+    ],
+    "q08": [
+      "catalog.json_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000"
+    ],
+    "q09": [
+      "suppliers.json_FIX_000",
+      "catalog.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q10": [
+      "REF-700_datasheet.pdf_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "catalog.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000"
+    ],
+    "q11": [
+      "LOOM-TECH-03.md_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "catalog.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q13": [
+      "WHS-SAFE-04.md_FIX_000",
+      "catalog.json_FIX_000",
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog_confusable.json_FIX_000"
+    ],
+    "q14": [
+      "PR-TECH-07.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "SUPPLIER-ADV-INJECTED.md_FIX_000"
+    ],
+    "q15": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q17": [
+      "suppliers.json_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "LOOM-TECH-03.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000"
+    ],
+    "q18": [
+      "PR-TECH-07.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "catalog.json_FIX_000",
+      "suppliers.json_FIX_000"
+    ],
+    "q19": [
+      "WHS-SAFE-04.md_FIX_000",
+      "LOOM-TECH-03.md_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "catalog.json_FIX_000",
+      "POLAR-OPS-02.md_FIX_000"
+    ],
+    "q21": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "catalog.json_FIX_000",
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000"
+    ],
+    "q22": [
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000"
+    ],
+    "q23": [
+      "catalog.json_FIX_000",
+      "SUPPLIER-ADV-INJECTED.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "suppliers.json_FIX_000",
+      "catalog_confusable.json_FIX_000"
+    ],
+    "q25": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "suppliers.json_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "SUPPLIER-ADV-INJECTED.md_FIX_000"
+    ],
+    "q26": [
+      "catalog_confusable.json_FIX_000",
+      "LOOM-TECH-03.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "WHS-SAFE-04.md_FIX_000"
+    ],
+    "q27": [
+      "POLAR-OPS-02.md_FIX_000",
+      "SUPPLIER-ADV-INJECTED.md_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000"
+    ],
+    "q29": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "suppliers.json_FIX_000",
+      "catalog.json_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q30": [
+      "PKG-120_datasheet.pdf_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "suppliers.json_FIX_000"
+    ],
+    "q31": [
+      "WHS-SAFE-04.md_FIX_000",
+      "SUPPLIER-ADV-INJECTED.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000"
+    ],
+    "q33": [
+      "WHS-SAFE-04.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q34": [
+      "LOOM-TECH-03.md_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "POLAR-OPS-02.md_FIX_000"
+    ],
+    "q35": [
+      "POLAR-OPS-02.md_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "WHS-SAFE-04.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ],
+    "q37": [
+      "LOOM-TECH-03.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog_confusable.json_FIX_000",
+      "catalog.json_FIX_000"
+    ],
+    "q38": [
+      "PKG-120_datasheet.pdf_FIX_000",
+      "PR-TECH-07.md_FIX_000",
+      "suppliers.json_FIX_000",
+      "REF-700_datasheet.pdf_FIX_000",
+      "LOOM-TECH-03.md_FIX_000"
+    ],
+    "q39": [
+      "WHS-SAFE-04.md_FIX_000",
+      "PKG-120_datasheet.pdf_FIX_000",
+      "catalog.json_FIX_000",
+      "POLAR-OPS-02.md_FIX_000",
+      "PR-TECH-07.md_FIX_000"
+    ]
+  }
+}

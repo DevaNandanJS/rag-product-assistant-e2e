@@ -20,7 +20,11 @@ class TokenCounter(Protocol):
 class FastEmbedTokenCounter:
     """Counts tokens using the tokenizer from the FastEmbed model."""
 
-    def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5", cache_dir: str | None = None) -> None:
+    def __init__(
+        self,
+        model_name: str = "BAAI/bge-small-en-v1.5",
+        cache_dir: str | None = None,
+    ) -> None:
         self._model_name = model_name
         self._cache_dir = cache_dir
         self._tokenizer: Any = None

@@ -1,0 +1,10 @@
+run_id: "B3"
+description: "Ablation B3: Structured Chunks + Hybrid RRF + Cross-Encoder Reranking (ms-marco-MiniLM-L-12-v2)"
+chunker: "structured"
+retrieval_mode: "hybrid"
+top_k: 5
+candidates: 20
+gate_enabled: false
+reranker: "Xenova/ms-marco-MiniLM-L-12-v2"
+split: "dev"
+entity_boost: false

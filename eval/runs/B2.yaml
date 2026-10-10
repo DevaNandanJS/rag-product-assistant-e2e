@@ -1,0 +1,10 @@
+run_id: "B2"
+description: "Ablation B2: Structured Chunks + Hybrid RRF (BM25 sparse + dense, k=60)"
+chunker: "structured"
+retrieval_mode: "hybrid"
+top_k: 5
+candidates: 20
+gate_enabled: false
+reranker: ""
+split: "dev"
+entity_boost: false

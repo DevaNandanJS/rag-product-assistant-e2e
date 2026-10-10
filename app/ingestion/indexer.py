@@ -105,7 +105,8 @@ class Indexer:
         report = IngestionReport(chunker=self.chunker)
 
         if rebuild:
-            logger.info("Rebuild requested: purging collection '%s'.", self.store.collection_name(self.chunker))
+            col_name = self.store.collection_name(self.chunker)
+            logger.info("Rebuild requested: purging collection '%s'.", col_name)
             self.store.delete_collection(chunker=self.chunker)
 
         if if_empty:
@@ -203,7 +204,8 @@ class Indexer:
                 for prod in norm_doc.product_records:
                     doc_text_parts.append(f"{prod.product_name}\n{prod.description or ''}")
                 for sup in norm_doc.supplier_records:
-                    doc_text_parts.append(f"{sup.supplier_name} {sup.headquarters} {sup.lead_time_notes or ''}")
+                    sup_text = f"{sup.supplier_name} {sup.headquarters} {sup.lead_time_notes or ''}"
+                    doc_text_parts.append(sup_text)
                 for b in norm_doc.bulletin_records:
                     doc_text_parts.append(b.content)
                 for sec in norm_doc.sections:
@@ -213,8 +215,9 @@ class Indexer:
                         doc_text_parts.append(page.text)
 
                 combined_text = "\n\n".join(t for t in doc_text_parts if t.strip())
+                has_records = bool(norm_doc.product_records or norm_doc.supplier_records)
                 stype: Literal["structured", "extracted", "ocr", "ocr_vision"] = (
-                    "structured" if (norm_doc.product_records or norm_doc.supplier_records) else "extracted"
+                    "structured" if has_records else "extracted"
                 )
                 chunks = chunk_fixed(
                     text=combined_text,

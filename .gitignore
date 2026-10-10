@@ -2,3 +2,6 @@
 .env
 __pycache__/
 *.pyc
+*_cache/
+.pytest_cache/
+.fastembed_cache/

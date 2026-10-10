@@ -4,13 +4,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-import tempfile
 
-import pytest
 import pymupdf
+import pytest
 
 from app.core.schemas import ProductRecord, SupplierRecord
-from scripts.make_dataset import generate_manifest, make_dataset
+from scripts.make_dataset import generate_manifest
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -23,7 +22,7 @@ def test_catalog_json_loadable():
     catalog_path = RAW_DIR / "catalog.json"
     assert catalog_path.exists(), f"Missing catalog file: {catalog_path}"
 
-    with open(catalog_path, "r", encoding="utf-8") as f:
+    with open(catalog_path, encoding="utf-8") as f:
         data = json.load(f)
 
     assert isinstance(data, list)
@@ -51,11 +50,11 @@ def test_catalog_json_loadable():
 
 
 def test_suppliers_json_loadable():
-    """Verify data/raw/suppliers.json exists, has 4 suppliers, and conforms to SupplierRecord schema."""
+    """Verify suppliers.json exists, has 4 suppliers, and conforms to SupplierRecord schema."""
     suppliers_path = RAW_DIR / "suppliers.json"
     assert suppliers_path.exists(), f"Missing suppliers file: {suppliers_path}"
 
-    with open(suppliers_path, "r", encoding="utf-8") as f:
+    with open(suppliers_path, encoding="utf-8") as f:
         data = json.load(f)
 
     assert isinstance(data, list)
@@ -89,7 +88,7 @@ def test_manifest_loadable():
     if not manifest_path.exists():
         pytest.skip("Manifest not generated yet; run scripts/make_dataset.py first")
 
-    with open(manifest_path, "r", encoding="utf-8") as f:
+    with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
 
     assert isinstance(manifest, list)
@@ -107,7 +106,7 @@ def test_manifest_loadable():
 
 
 def test_manifest_catalog_facts_present():
-    """Verify all product_ids referenced in manifest catalog facts exist in catalog.json or confusable."""
+    """Verify all product_ids referenced in manifest catalog facts exist in catalog."""
     manifest_path = DATA_DIR / "manifest.json"
     catalog_path = RAW_DIR / "catalog.json"
     confusable_path = RAW_DIR / "catalog_confusable.json"
@@ -115,15 +114,15 @@ def test_manifest_catalog_facts_present():
     if not manifest_path.exists():
         pytest.skip("Manifest not generated yet; run scripts/make_dataset.py first")
 
-    with open(manifest_path, "r", encoding="utf-8") as f:
+    with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
 
-    with open(catalog_path, "r", encoding="utf-8") as f:
+    with open(catalog_path, encoding="utf-8") as f:
         catalog = json.load(f)
 
     valid_product_ids = {p["product_id"] for p in catalog}
     if confusable_path.exists():
-        with open(confusable_path, "r", encoding="utf-8") as f:
+        with open(confusable_path, encoding="utf-8") as f:
             confusable = json.load(f)
             valid_product_ids.update(p["product_id"] for p in confusable)
 
@@ -141,10 +140,10 @@ def test_manifest_supplier_facts_present():
     if not manifest_path.exists():
         pytest.skip("Manifest not generated yet; run scripts/make_dataset.py first")
 
-    with open(manifest_path, "r", encoding="utf-8") as f:
+    with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
 
-    with open(suppliers_path, "r", encoding="utf-8") as f:
+    with open(suppliers_path, encoding="utf-8") as f:
         suppliers = json.load(f)
 
     valid_supplier_ids = {s["supplier_id"] for s in suppliers}
@@ -168,17 +167,18 @@ def test_scanned_pdfs_have_no_text_layer():
         assert len(doc) >= 2, f"{sf} must have at least 2 pages"
         for page_idx, page in enumerate(doc):
             extracted = page.get_text().strip()
-            assert extracted == "", f"{sf} page {page_idx + 1} contains unexpected text layer: {repr(extracted)}"
+            msg = f"{sf} page {page_idx + 1} contains unexpected text layer: {repr(extracted)}"
+            assert extracted == "", msg
         doc.close()
 
 
 def test_confusable_sku_is_distinct():
-    """Verify PKG-120-PRO in catalog_confusable.json has distinct throughput and tape width from PKG-120."""
+    """Verify PKG-120-PRO in catalog_confusable.json has distinct throughput and tape width."""
     confusable_path = RAW_DIR / "catalog_confusable.json"
     if not confusable_path.exists():
         pytest.skip("catalog_confusable.json not generated yet")
 
-    with open(confusable_path, "r", encoding="utf-8") as f:
+    with open(confusable_path, encoding="utf-8") as f:
         data = json.load(f)
 
     pro = next(p for p in data if p["product_id"] == "PKG-120-PRO")
@@ -205,3 +205,32 @@ def test_make_dataset_is_reproducible(tmp_path: Path):
     generate_manifest(out2)
 
     assert out1.read_bytes() == out2.read_bytes()
+
+
+def test_questions_json_integrity():
+    """Verify eval/questions.json contains 40 questions with 30 dev and 10 holdout."""
+    q_path = PROJECT_ROOT / "eval" / "questions.json"
+    assert q_path.exists(), f"Missing questions file: {q_path}"
+
+    with open(q_path, encoding="utf-8") as f:
+        questions = json.load(f)
+
+    assert len(questions) == 40
+    dev_count = sum(1 for q in questions if q.get("split") == "dev")
+    holdout_count = sum(1 for q in questions if q.get("split") == "holdout")
+    assert dev_count == 30
+    assert holdout_count == 10
+
+    categories = {q["category"] for q in questions}
+    expected_categories = {
+        "direct_factual",
+        "semantic_paraphrase",
+        "cross_product_comparison",
+        "multi_doc_relational",
+        "metadata_filtered",
+        "unanswerable_offtopic",
+        "unanswerable_missing",
+        "ocr_only",
+        "exact_code_search",
+    }
+    assert categories == expected_categories

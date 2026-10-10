@@ -1,0 +1,9 @@
+run_id: "B0"
+description: "Baseline: Fixed 500-token chunks, dense-only retrieval, top-5, no reranker, gate disabled"
+chunker: "fixed"
+retrieval_mode: "dense"
+top_k: 5
+candidates: 20
+gate_enabled: false
+reranker: ""
+split: "dev"

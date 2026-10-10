@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import re
+from collections import Counter
 from typing import Any, Protocol, runtime_checkable
+
+from qdrant_client.models import SparseVector
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +24,19 @@ class Embedder(Protocol):
     @property
     def dim(self) -> int:
         """Dimensionality of vector representations produced by this embedder."""
+        ...
+
+
+@runtime_checkable
+class SparseEmbedder(Protocol):
+    """Protocol for embedding textual content into sparse representations."""
+
+    def embed(self, texts: list[str]) -> list[Any]:
+        """Compute sparse embeddings for a batch of strings."""
+        ...
+
+    def query_embed(self, query: str) -> Any:
+        """Compute sparse embedding for a search query string."""
         ...
 
 
@@ -82,3 +99,81 @@ class FakeEmbedder:
     @property
     def dim(self) -> int:
         return self._dim
+
+
+class FastEmbedSparseEmbedder:
+    """Production sparse embedder wrapping FastEmbed's BM25 model."""
+
+    def __init__(
+        self,
+        model_name: str = "Qdrant/bm25",
+        cache_dir: str | None = None,
+    ) -> None:
+        try:
+            from fastembed import SparseTextEmbedding
+        except ImportError:
+            from fastembed.sparse.sparse_text_embedding import SparseTextEmbedding  # type: ignore
+
+        kwargs: dict[str, Any] = {"model_name": model_name}
+        if cache_dir:
+            kwargs["cache_dir"] = cache_dir
+
+        self._model = SparseTextEmbedding(**kwargs)
+        self._model_name = model_name
+
+    def embed(self, texts: list[str]) -> list[Any]:
+        if not texts:
+            return []
+        results = list(self._model.embed(texts))
+        sparse_vecs: list[SparseVector] = []
+        for item in results:
+            indices = (
+                item.indices.tolist()
+                if hasattr(item.indices, "tolist")
+                else list(item.indices)
+            )
+            values = item.values.tolist() if hasattr(item.values, "tolist") else list(item.values)
+            sparse_vecs.append(SparseVector(indices=indices, values=values))
+        return sparse_vecs
+
+    def query_embed(self, query: str) -> Any:
+        if hasattr(self._model, "query_embed"):
+            results = list(self._model.query_embed([query]))
+        else:
+            results = list(self._model.embed([query]))
+        if not results:
+            return SparseVector(indices=[], values=[])
+        item = results[0]
+        indices = (
+            item.indices.tolist()
+            if hasattr(item.indices, "tolist")
+            else list(item.indices)
+        )
+        values = item.values.tolist() if hasattr(item.values, "tolist") else list(item.values)
+        return SparseVector(indices=indices, values=values)
+
+
+class FakeSparseEmbedder:
+    """Deterministic hash-based sparse pseudo-embedder for offline testing."""
+
+    def _tokenize_to_sparse(self, text: str) -> Any:
+        tokens = re.findall(r"[A-Za-z0-9_\-]+", text.lower())
+        if not tokens:
+            return SparseVector(indices=[], values=[])
+        counts = Counter(tokens)
+        token_indices: dict[int, float] = {}
+        for tok, count in counts.items():
+            h = int(hashlib.sha256(tok.encode("utf-8")).hexdigest()[:8], 16)
+            idx = (h % 16777215) + 1
+            weight = float(1.0 + (count - 1) * 0.5)
+            token_indices[idx] = weight
+        sorted_indices = sorted(token_indices.keys())
+        values = [token_indices[idx] for idx in sorted_indices]
+        return SparseVector(indices=sorted_indices, values=values)
+
+    def embed(self, texts: list[str]) -> list[Any]:
+        return [self._tokenize_to_sparse(t) for t in texts]
+
+    def query_embed(self, query: str) -> Any:
+        return self._tokenize_to_sparse(query)
+

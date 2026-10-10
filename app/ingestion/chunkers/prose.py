@@ -39,7 +39,10 @@ def _split_into_blocks(text: str) -> list[str]:
     for line in lines:
         stripped = line.strip()
         # Markdown table row check
-        if "|" in stripped and (stripped.startswith("|") or stripped.endswith("|") or " | " in stripped):
+        is_table_row = "|" in stripped and (
+            stripped.startswith("|") or stripped.endswith("|") or " | " in stripped
+        )
+        if is_table_row:
             if current_para:
                 blocks.append("\n".join(current_para))
                 current_para = []
@@ -133,7 +136,7 @@ def chunk_prose(
                 atomic_units.append(block)
             else:
                 # Table exceeds max: split by table rows
-                table_lines = [l for l in block.splitlines() if l.strip()]
+                table_lines = [row_line for row_line in block.splitlines() if row_line.strip()]
                 atomic_units.extend(table_lines)
         else:
             # Normal text block: check size

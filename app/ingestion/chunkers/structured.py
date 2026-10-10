@@ -5,7 +5,7 @@ Generates Master Card Chunks and Atomic Specification Chunks with strict token c
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+from collections.abc import Sequence
 
 from app.core.schemas import Chunk, ProductRecord, SpecValue, SupplierRecord
 from app.ingestion.chunkers.tokens import TokenCounter
@@ -81,7 +81,8 @@ def chunk_structured_products(
 
         # For common comparison keys not present on product, add if not consumable/custom
         for canonical_key in CANONICAL_SPEC_KEYS:
-            if canonical_key not in handled_keys and canonical_key in ("price", "lead_time", "warranty"):
+            is_common = canonical_key in ("price", "lead_time", "warranty")
+            if canonical_key not in handled_keys and is_common:
                 spec_lines.append(f"  {canonical_key}: Not documented")
 
         specs_section = "\n".join(spec_lines)
@@ -195,7 +196,8 @@ def chunk_structured_suppliers(
 
         header = f"{s_name} | Supplier Overview"
         cats_str = ", ".join(supplier.categories) if supplier.categories else "Not documented"
-        regions_str = ", ".join(supplier.regions_served) if supplier.regions_served else "Not documented"
+        reg = supplier.regions_served
+        regions_str = ", ".join(reg) if reg else "Not documented"
         lead_time = supplier.lead_time_notes or "Not documented"
 
         body = (

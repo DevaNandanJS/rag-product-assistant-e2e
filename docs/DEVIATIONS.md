@@ -10,4 +10,6 @@ This document tracks all intentional divergences or external library/API adjustm
 | 2026-10-09 | Phase 2 | PDF Generation | `reportlab` not listed in requirements.txt | Added `reportlab==4.2.5` to requirements.txt | BUILD_GUIDE specifies reportlab for synthetic text PDF generation but omitted from pinned dependencies list. Stable library with no conflicts. |
 | 2026-10-09 | Phase 3A | OCR / Tesseract | `image_to_data(output_type=Output.DATAFRAME)` | Fallback to `Output.DICT` when `pandas` is not installed | `pandas` is not in pinned requirements. `Output.DICT` produces identical coordinates and confidences with zero external dependencies. |
 | 2026-10-09 | Phase 3B | Qdrant Sparse Setup | BM25 sparse vectors in Qdrant | Provisioned named sparse vector config in collection schema; vector values deferred to Phase 5 | Collection schema is prepared for hybrid search without requiring premature BM25 token generation in Phase 3B ingestion. |
+| 2026-10-10 | Phase 5 | BM25 Sparse Vectors | Qdrant native IDF modifier | `SparseEmbedder` protocol with `FastEmbedSparseEmbedder` (`Qdrant/bm25`) + `FakeSparseEmbedder` | Maintains `qdrant-client==1.11.3` pin without breaking changes; pre-trained weights avoid runtime corpus-fitting state; FakeSparseEmbedder guarantees 100% offline, zero-network test execution. |
+
 

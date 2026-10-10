@@ -91,8 +91,22 @@ class TestFixedChunker:
     def test_deterministic_point_ids(self) -> None:
         counter = WhitespaceTokenCounter()
         text = "Consistent point ID verification text."
-        chunks1 = chunk_fixed(text=text, document="a.txt", page=1, source_type="extracted", ocr_confidence=None, counter=counter)
-        chunks2 = chunk_fixed(text=text, document="a.txt", page=1, source_type="extracted", ocr_confidence=None, counter=counter)
+        chunks1 = chunk_fixed(
+            text=text,
+            document="a.txt",
+            page=1,
+            source_type="extracted",
+            ocr_confidence=None,
+            counter=counter,
+        )
+        chunks2 = chunk_fixed(
+            text=text,
+            document="a.txt",
+            page=1,
+            source_type="extracted",
+            ocr_confidence=None,
+            counter=counter,
+        )
         assert chunks1[0].point_id == chunks2[0].point_id
 
 
@@ -163,7 +177,12 @@ class TestStructuredChunker:
             specs={"throughput": SpecValue(value=10)},
             source_document="catalog.json",
         )
-        chunks = chunk_structured_products([product], document="catalog.json", counter=counter, max_tokens=480)
+        chunks = chunk_structured_products(
+            [product],
+            document="catalog.json",
+            counter=counter,
+            max_tokens=480,
+        )
         for c in chunks:
             assert c.token_count <= 480
 
