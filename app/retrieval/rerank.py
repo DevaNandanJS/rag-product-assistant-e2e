@@ -64,19 +64,24 @@ class CrossEncoderReranker:
         doc_texts = [c.text for c in chunks]
         try:
             scores_generator = self._model.rerank(query, doc_texts)
-            # scores_generator yields dicts or items, e.g. [{"result": idx, "score": float}, ...]
             results: list[tuple[Chunk, float]] = []
-            for item in scores_generator:
+            for i, item in enumerate(scores_generator):
                 if isinstance(item, dict):
                     idx = int(item["result"])
                     score = float(item["score"])
                 elif hasattr(item, "index") and hasattr(item, "score"):
                     idx = int(item.index)
                     score = float(item.score)
+                elif isinstance(item, (int, float)) or hasattr(item, "__float__"):
+                    idx = i
+                    score = float(item)
                 else:
-                    # Assume (idx, score) or raw score
-                    idx, score = item[0], float(item[1])
+                    try:
+                        idx, score = int(item[0]), float(item[1])
+                    except Exception:
+                        idx, score = i, float(item)
                 results.append((chunks[idx], score))
+            results.sort(key=lambda x: x[1], reverse=True)
             return results[:top_k]
         except Exception as exc:
             logger.warning("FastEmbed reranker failed; falling back to original order: %s", exc)

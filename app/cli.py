@@ -395,6 +395,131 @@ def run_eval_gate(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_download_models() -> int:
+    """Pre-download and cache embedding and reranker models."""
+    from app.core.config import get_settings
+
+    settings = get_settings()
+    print(f"Pre-downloading models into '{settings.FASTEMBED_CACHE_PATH}'...")
+
+    try:
+        from fastembed import SparseTextEmbedding, TextEmbedding
+
+        print(f"1. Downloading dense model: {settings.EMBEDDING_MODEL}...")
+        TextEmbedding(
+            model_name=settings.EMBEDDING_MODEL,
+            cache_dir=settings.FASTEMBED_CACHE_PATH,
+        )
+        print("2. Downloading sparse model: Qdrant/bm25...")
+        SparseTextEmbedding(
+            model_name="Qdrant/bm25",
+            cache_dir=settings.FASTEMBED_CACHE_PATH,
+        )
+    except Exception as exc:
+        print(f"[ERROR] Failed downloading FastEmbed models: {exc}")
+        return 1
+
+    if settings.RERANKER_MODEL:
+        try:
+            from app.retrieval.rerank import CrossEncoderReranker
+
+            print(f"3. Downloading reranker model: {settings.RERANKER_MODEL}...")
+            CrossEncoderReranker(
+                model_name=settings.RERANKER_MODEL,
+                cache_dir=settings.FASTEMBED_CACHE_PATH,
+            )
+        except Exception as exc:
+            print(f"[WARN] Failed downloading reranker model: {exc}")
+
+    print("[OK] All models downloaded and cached successfully.")
+    return 0
+
+
+def run_ask(args: argparse.Namespace) -> int:
+    """Query the grounded generation assistant from the command line."""
+    import asyncio
+
+    from app.core.config import get_settings
+    from app.core.schemas import AskRequest
+    from app.generation.cache import GenerationCache
+    from app.generation.router import build_router_from_settings
+    from app.generation.service import GenerationService
+    from app.retrieval.embedder import FastEmbedEmbedder
+    from app.retrieval.pipeline import RetrievalPipeline
+    from app.retrieval.store import QdrantStore
+
+    settings = get_settings()
+
+    embedder = FastEmbedEmbedder(
+        model_name=settings.EMBEDDING_MODEL,
+        cache_dir=settings.FASTEMBED_CACHE_PATH,
+    )
+    store = QdrantStore(settings=settings, embedder=embedder)
+
+    reranker = None
+    if settings.RERANKER_MODEL:
+        try:
+            from app.retrieval.rerank import CrossEncoderReranker
+
+            reranker = CrossEncoderReranker(
+                model_name=settings.RERANKER_MODEL,
+                cache_dir=settings.FASTEMBED_CACHE_PATH,
+            )
+        except Exception as exc:
+            print(f"[WARN] Reranker unavailable ({exc}); running without reranker.")
+
+    pipeline = RetrievalPipeline(
+        settings=settings,
+        embedder=embedder,
+        store=store,
+        reranker=reranker,
+    )
+
+    router = build_router_from_settings(settings)
+    cache = GenerationCache(
+        cache_path=settings.LLM_CACHE_PATH,
+        enabled=settings.LLM_CACHE_WRITE,
+    )
+    service = GenerationService(
+        settings=settings,
+        pipeline=pipeline,
+        router=router,
+        cache=cache,
+    )
+
+    request = AskRequest(question=args.question, debug=args.debug)
+
+    async def _execute() -> None:
+        async for event in service.generate(request):
+            if event.type == "meta":
+                if args.debug:
+                    print(f"[META] {event.payload}")
+            elif event.type == "debug":
+                print(f"[DEBUG] {event.payload}\n")
+            elif event.type == "token":
+                print(event.payload.get("content", ""), end="", flush=True)
+            elif event.type == "sources":
+                print("\n\n--- Sources ---")
+                for s in event.payload.get("sources", []):
+                    cited_badge = " [CITED]" if s.get("cited") else ""
+                    print(
+                        f"[{s['id']}]{cited_badge} product={s.get('product_id')} "
+                        f"doc={s.get('document')} page={s.get('page')}"
+                    )
+            elif event.type == "grounding":
+                warnings = event.payload.get("warnings", [])
+                if warnings:
+                    print(f"\n[GROUNDING WARNINGS] {warnings}")
+            elif event.type == "done":
+                status = event.payload.get("status")
+                lat = event.payload.get("latency_ms")
+                ttft = event.payload.get("ttft_ms")
+                print(f"\n\n[DONE] status={status} latency={lat}ms ttft={ttft}ms\n")
+
+    asyncio.run(_execute())
+    return 0
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="filumart",
@@ -467,6 +592,20 @@ def main() -> None:
         "--questions", type=str, default="eval/questions.json", help="Questions JSON path"
     )
 
+    # Command: ask
+    ask_parser = subparsers.add_parser(
+        "ask", help="Query the RAG assistant with grounded answer generation"
+    )
+    ask_parser.add_argument("question", type=str, help="Question to ask the assistant")
+    ask_parser.add_argument(
+        "--debug", action="store_true", help="Print retrieval debug telemetry"
+    )
+
+    # Command: download-models
+    subparsers.add_parser(
+        "download-models", help="Pre-download and cache embedding/reranker models"
+    )
+
     # Command: serve (stub)
     subparsers.add_parser("serve", help="Start FastAPI Uvicorn server")
 
@@ -484,6 +623,10 @@ def main() -> None:
         sys.exit(run_eval_report(parsed))
     elif parsed.command == "eval-gate":
         sys.exit(run_eval_gate(parsed))
+    elif parsed.command == "ask":
+        sys.exit(run_ask(parsed))
+    elif parsed.command == "download-models":
+        sys.exit(run_download_models())
     elif parsed.command == "serve":
         print(f"Command '{parsed.command}' will be registered in its respective build phase.")
         sys.exit(0)
@@ -494,4 +637,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
