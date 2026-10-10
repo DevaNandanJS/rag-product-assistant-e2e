@@ -5,7 +5,6 @@ A robust, enterprise-grade Retrieval-Augmented Generation (RAG) assistant design
 > [!IMPORTANT]
 > **Assessment Reviewer Deliverables & Quick Links:**
 > - 📄 **Official Submission PDF:** [`docs/Filumart_RAG_Assistant_Reviewer_Submission_Package.pdf`](docs/Filumart_RAG_Assistant_Reviewer_Submission_Package.pdf)
-> - 📋 **Full Compliance Audit Report:** [`docs/ASSESSMENT_COMPLIANCE_REPORT.md`](docs/ASSESSMENT_COMPLIANCE_REPORT.md)
 > - 🧪 **Evaluation & Verification Guide:** [`docs/EVALUATION_GUIDE.md`](docs/EVALUATION_GUIDE.md)
 > - 🔍 **Root-Cause Failure Analysis:** [`docs/FAILURE_ANALYSIS.md`](docs/FAILURE_ANALYSIS.md)
 
