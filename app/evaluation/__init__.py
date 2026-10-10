@@ -1,6 +1,7 @@
 """Evaluation package: Ground truth labels, metrics, runner, bootstrap, and reports."""
 
 from app.evaluation.bootstrap import BootstrapResult, paired_bootstrap
+from app.evaluation.judge import JudgeScore, LLMJudge
 from app.evaluation.labels import EvidenceItem, is_chunk_match, label_retrieval
 from app.evaluation.metrics import (
     AggregateMetrics,
@@ -18,7 +19,15 @@ from app.evaluation.report import (
     format_markdown_table,
     save_result,
 )
-from app.evaluation.runner import EvalConfig, EvalQuestion, EvalResult, EvalRunner
+from app.evaluation.runner import (
+    AnswerAggregateMetrics,
+    AnswerEvalRunner,
+    AnswerRecord,
+    EvalConfig,
+    EvalQuestion,
+    EvalResult,
+    EvalRunner,
+)
 
 __all__ = [
     "EvidenceItem",
@@ -42,4 +51,10 @@ __all__ = [
     "format_markdown_table",
     "format_comparison_table",
     "save_result",
+    # Phase 9 additions
+    "JudgeScore",
+    "LLMJudge",
+    "AnswerRecord",
+    "AnswerAggregateMetrics",
+    "AnswerEvalRunner",
 ]

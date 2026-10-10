@@ -1,0 +1,10 @@
+run_id: "final"
+description: "Phase 9 final frozen configuration: Structured Chunks + Hybrid RRF + Entity Boost + Reranker + Gate (post failure-analysis remediations)"
+chunker: "structured"
+retrieval_mode: "hybrid"
+top_k: 5
+candidates: 20
+gate_enabled: true
+reranker: "Xenova/ms-marco-MiniLM-L-12-v2"
+split: "dev"
+entity_boost: true

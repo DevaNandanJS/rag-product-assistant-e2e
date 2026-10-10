@@ -230,6 +230,118 @@ def run_eval(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_eval_answers(args: argparse.Namespace) -> int:
+    """Run full answer-level evaluation: generation + LLM-as-a-Judge scoring.
+
+    Generates answers for all questions in the requested split using
+    GenerationService, then scores each answer with LLMJudge (Groq Llama-3.3-70B).
+    Saves per-question records to eval/results/answer_eval_{split}.jsonl.
+    """
+    import asyncio
+    from pathlib import Path
+
+    from app.core.config import get_settings
+    from app.evaluation.judge import LLMJudge
+    from app.evaluation.runner import AnswerEvalRunner
+    from app.generation.cache import GenerationCache
+    from app.generation.router import build_router_from_settings
+    from app.generation.service import GenerationService
+    from app.retrieval.embedder import FastEmbedEmbedder
+    from app.retrieval.pipeline import RetrievalPipeline
+    from app.retrieval.store import QdrantStore
+
+    settings = get_settings()
+    split = getattr(args, "split", "dev")
+    questions_path = getattr(args, "questions", "eval/questions.json")
+    output_dir = getattr(args, "output_dir", "eval/results")
+    use_judge = not getattr(args, "no_judge", False)
+
+    print(f"\n=== Phase 9: Answer Evaluation (split: {split}) ===")
+    print(f"Generator: {settings.GEMINI_MODEL} via Gemini")
+    print(f"Judge:     {settings.JUDGE_MODEL} via Groq")
+    print(f"Questions: {questions_path}")
+    print(f"Output:    {output_dir}/answer_eval_{split}.jsonl")
+    print()
+
+    # Build full generation pipeline
+    embedder = FastEmbedEmbedder(
+        model_name=settings.EMBEDDING_MODEL,
+        cache_dir=settings.FASTEMBED_CACHE_PATH,
+    )
+    store = QdrantStore(settings=settings, embedder=embedder)
+
+    reranker = None
+    if settings.RERANKER_MODEL:
+        try:
+            from app.retrieval.rerank import CrossEncoderReranker
+
+            reranker = CrossEncoderReranker(
+                model_name=settings.RERANKER_MODEL,
+                cache_dir=settings.FASTEMBED_CACHE_PATH,
+            )
+        except Exception as exc:
+            print(f"[WARN] Reranker unavailable ({exc}); running without reranker.")
+
+    pipeline = RetrievalPipeline(
+        settings=settings,
+        embedder=embedder,
+        store=store,
+        reranker=reranker,
+    )
+    router = build_router_from_settings(settings)
+    cache = GenerationCache(
+        cache_path=settings.LLM_CACHE_PATH,
+        enabled=settings.LLM_CACHE_WRITE,
+    )
+    service = GenerationService(
+        settings=settings,
+        pipeline=pipeline,
+        router=router,
+        cache=cache,
+    )
+    judge = LLMJudge(settings=settings)
+
+    runner = AnswerEvalRunner(
+        settings=settings,
+        generation_service=service,
+        judge=judge if use_judge else None,
+    )
+
+    async def _run() -> None:
+        records, metrics = await runner.run_with_llm(
+            questions_path=questions_path,
+            split=split,
+            output_dir=output_dir,
+            use_judge=use_judge,
+        )
+
+        print("\n=== Answer Evaluation Summary ===")
+        m = metrics.as_dict()
+        print(f"Split:                  {m['split']}")
+        print(f"Total Questions:        {m['total_questions']}")
+        print(f"Answerable:             {m['answerable_count']}")
+        print(f"Unanswerable:           {m['unanswerable_count']}")
+        print(f"")
+        print(f"Gate Pass Rate:         {m['gate_pass_rate']:.1%}")
+        print(f"Correct Rejection Rate: {m['correct_rejection_rate']:.1%}  (unanswerable caught by gate)")
+        print(f"False Rejection Rate:   {m['false_rejection_rate']:.1%}  (answerable wrongly gated)")
+        print(f"")
+        if any(r.judge_correctness is not None for r in records):
+            print(f"Mean Correctness:       {m['mean_correctness']:.4f}  (LLM-as-a-Judge)")
+            print(f"Mean Groundedness:      {m['mean_groundedness']:.4f}  (LLM-as-a-Judge)")
+        else:
+            print("Mean Correctness:       N/A (judge not available)")
+            print("Mean Groundedness:      N/A (judge not available)")
+        print(f"Citation Precision:     {m['citation_precision']:.4f}")
+        print(f"")
+        print(f"Median Latency:         {m['median_latency_ms']:.1f} ms")
+        print(f"P95 Latency:            {m['p95_latency_ms']:.1f} ms")
+        print(f"Median TTFT:            {m['median_ttft_ms']:.1f} ms")
+
+    asyncio.run(_run())
+    return 0
+
+
 def run_eval_report(args: argparse.Namespace) -> int:
     import json
     from pathlib import Path
@@ -520,6 +632,98 @@ def run_ask(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_eval_answers(args: argparse.Namespace) -> int:
+    """Execute Phase 9 full answer evaluation with GenerationService + LLMJudge."""
+    import asyncio
+
+    from app.core.config import get_settings
+    from app.evaluation.judge import LLMJudge
+    from app.evaluation.runner import AnswerEvalRunner
+    from app.generation.cache import GenerationCache
+    from app.generation.router import build_router_from_settings
+    from app.generation.service import GenerationService
+    from app.retrieval.embedder import FastEmbedEmbedder
+    from app.retrieval.pipeline import RetrievalPipeline
+    from app.retrieval.store import QdrantStore
+
+    settings = get_settings()
+
+    embedder = FastEmbedEmbedder(
+        model_name=settings.EMBEDDING_MODEL,
+        cache_dir=settings.FASTEMBED_CACHE_PATH,
+    )
+    store = QdrantStore(settings=settings, embedder=embedder)
+
+    reranker = None
+    if settings.RERANKER_MODEL:
+        try:
+            from app.retrieval.rerank import CrossEncoderReranker
+
+            reranker = CrossEncoderReranker(
+                model_name=settings.RERANKER_MODEL,
+                cache_dir=settings.FASTEMBED_CACHE_PATH,
+            )
+        except Exception as exc:
+            print(f"[WARN] Reranker unavailable ({exc}); continuing without reranker.")
+
+    pipeline = RetrievalPipeline(
+        settings=settings,
+        embedder=embedder,
+        store=store,
+        reranker=reranker,
+    )
+
+    router = build_router_from_settings(settings)
+    cache = GenerationCache(
+        cache_path=settings.LLM_CACHE_PATH,
+        enabled=settings.LLM_CACHE_WRITE,
+    )
+    service = GenerationService(
+        settings=settings,
+        pipeline=pipeline,
+        router=router,
+        cache=cache,
+    )
+
+    judge = None
+    if not getattr(args, "no_judge", False):
+        judge = LLMJudge(settings)
+
+    runner = AnswerEvalRunner(
+        settings=settings,
+        generation_service=service,
+        judge=judge,
+    )
+
+    async def _execute() -> None:
+        records, metrics = await runner.run_with_llm(
+            questions_path=args.questions,
+            split=args.split,
+            output_dir=args.output_dir,
+            use_judge=not getattr(args, "no_judge", False),
+        )
+
+        print("\n" + "=" * 65)
+        print(f"      PHASE 9: ANSWER EVALUATION METRICS REPORT ({args.split.upper()})")
+        print("=" * 65)
+        print(f"Total questions:            {metrics.total_questions}")
+        print(f"  - Answerable:             {metrics.answerable_count}")
+        print(f"  - Unanswerable:           {metrics.unanswerable_count}")
+        print(f"Gate pass rate:             {metrics.gate_pass_rate:.1%}")
+        print(f"Correct rejection rate:     {metrics.correct_rejection_rate:.1%}")
+        print(f"False rejection rate:       {metrics.false_rejection_rate:.1%}")
+        print(f"Mean judge correctness:     {metrics.mean_correctness:.3f}")
+        print(f"Mean judge groundedness:    {metrics.mean_groundedness:.3f}")
+        print(f"Citation precision:         {metrics.citation_precision:.3f}")
+        print(f"Median latency:             {metrics.median_latency_ms:.0f} ms")
+        print(f"P95 latency:                {metrics.p95_latency_ms:.0f} ms")
+        print(f"Median TTFT:                {metrics.median_ttft_ms:.0f} ms")
+        print("=" * 65)
+
+    asyncio.run(_execute())
+    return 0
+
+
 def run_serve(args: argparse.Namespace) -> int:
     """Start the FastAPI application via Uvicorn."""
     import uvicorn
@@ -541,6 +745,61 @@ def run_serve(args: argparse.Namespace) -> int:
         log_level=settings.LOG_LEVEL.lower(),
         timeout_graceful_shutdown=5,
     )
+    return 0
+
+
+def run_download_models() -> int:
+    """Pre-download FastEmbed dense, sparse, and cross-encoder models into cache directory."""
+    from app.core.config import get_settings
+    from app.retrieval.embedder import FastEmbedEmbedder, FastEmbedSparseEmbedder
+
+    settings = get_settings()
+    cache_path = settings.FASTEMBED_CACHE_PATH
+    print(f"Pre-downloading FastEmbed dense model ({settings.EMBEDDING_MODEL}) to {cache_path}...")
+    try:
+        embedder = FastEmbedEmbedder(
+            model_name=settings.EMBEDDING_MODEL,
+            cache_dir=cache_path,
+        )
+        embedder.embed(["warmup"])
+        print(f"[OK] Dense model '{settings.EMBEDDING_MODEL}' initialized.")
+    except Exception as e:
+        print(f"[ERROR] Failed to download dense model: {e}")
+        return 1
+
+    print(f"Pre-downloading FastEmbed sparse BM25 model to {cache_path}...")
+    try:
+        sparse_embedder = FastEmbedSparseEmbedder(cache_dir=cache_path)
+        sparse_embedder.embed(["warmup"])
+        print("[OK] Sparse BM25 model initialized.")
+    except Exception as e:
+        print(f"[WARN] Failed to download sparse model: {e}")
+
+    if settings.RERANKER_MODEL:
+        print(f"Pre-downloading Cross-Encoder reranker ({settings.RERANKER_MODEL}) to {cache_path}...")
+        try:
+            from app.core.schemas import Chunk
+            from app.retrieval.rerank import CrossEncoderReranker
+
+            reranker = CrossEncoderReranker(
+                model_name=settings.RERANKER_MODEL,
+                cache_dir=cache_path,
+            )
+            dummy_chunk = Chunk(
+                chunk_id="warmup",
+                document_id="doc",
+                content="warmup content",
+                product_id="P1",
+                category="cat",
+                doc_type="text",
+                source_path="path",
+            )
+            reranker.rerank("warmup query", [dummy_chunk], top_k=1)
+            print(f"[OK] Reranker model '{settings.RERANKER_MODEL}' initialized.")
+        except Exception as e:
+            print(f"[WARN] Failed to download reranker model: {e}")
+
+    print("[OK] Model pre-download complete.")
     return 0
 
 
@@ -630,6 +889,35 @@ def main() -> None:
         "download-models", help="Pre-download and cache embedding/reranker models"
     )
 
+    # Command: eval-answers
+    eval_answers_parser = subparsers.add_parser(
+        "eval-answers",
+        help="Phase 9: Full answer evaluation with LLM generation + LLM-as-a-Judge scoring",
+    )
+    eval_answers_parser.add_argument(
+        "--split",
+        choices=["dev", "holdout", "all"],
+        default="dev",
+        help="Question split to evaluate (default: dev)",
+    )
+    eval_answers_parser.add_argument(
+        "--questions",
+        type=str,
+        default="eval/questions.json",
+        help="Path to questions JSON file",
+    )
+    eval_answers_parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="eval/results",
+        help="Directory to write answer_eval_{split}.jsonl",
+    )
+    eval_answers_parser.add_argument(
+        "--no-judge",
+        action="store_true",
+        help="Skip LLM-as-a-Judge scoring (generation only)",
+    )
+
     # Command: serve
     serve_parser = subparsers.add_parser("serve", help="Start FastAPI Uvicorn server")
     serve_parser.add_argument(
@@ -658,6 +946,8 @@ def main() -> None:
         sys.exit(run_eval_gate(parsed))
     elif parsed.command == "ask":
         sys.exit(run_ask(parsed))
+    elif parsed.command == "eval-answers":
+        sys.exit(run_eval_answers(parsed))
     elif parsed.command == "download-models":
         sys.exit(run_download_models())
     elif parsed.command == "serve":
