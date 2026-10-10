@@ -1,7 +1,37 @@
+# Environment & Secrets
 .venv/
+venv/
+env/
 .env
+.env.*
+!.env.example
+
+# Python Caches
 __pycache__/
-*.pyc
-*_cache/
+*.py[cod]
+*$py.class
+
+# Test & Linter Caches
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Model & Embedding Caches
 .fastembed_cache/
+*_cache/
+
+# Local Qdrant & Database Storage
+qdrant_local/
+qdrant_storage/
+*.sqlite
+*.sqlite3
+*.db
+
+# Runtime Data Caches (preserve directory via .gitkeep)
+data/cache/*
+!data/cache/.gitkeep
+
+# Logs & OS artifacts
+*.log
+.DS_Store
+Thumbs.db
