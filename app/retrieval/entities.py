@@ -131,11 +131,35 @@ COMPARISON_KEYWORDS = (
 )
 
 
+def get_product_catalog() -> dict[str, list[str]]:
+    """Return catalog dictionary merged dynamically with data/raw/catalog.json if present."""
+    cat = dict(PRODUCT_CATALOG)
+    try:
+        import json
+        from pathlib import Path
+        for path in [Path("data/raw/catalog.json"), Path("data/raw/catalog_confusable.json")]:
+            if path.exists():
+                with open(path, encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, list):
+                    for item in data:
+                        pid = item.get("product_id")
+                        pname = item.get("product_name")
+                        if pid and pid not in cat:
+                            aliases = [pid, pid.replace("-", "")]
+                            if pname:
+                                aliases.append(pname)
+                            cat[pid] = aliases
+    except Exception:
+        pass
+    return cat
+
+
 def extract_entities(question: str, threshold: float = 88.0) -> list[str]:
     """Extract product SKU entities from a natural language question.
 
-    Uses a combination of exact regex pattern matches and RapidFuzz partial token matching
-    against known product identifiers and aliases.
+    Uses a combination of exact regex pattern matches, RapidFuzz partial token matching
+    against known and dynamic product identifiers, and generic alphanumeric SKU patterns.
 
     Args:
         question: The user query or evaluation question.
@@ -147,9 +171,9 @@ def extract_entities(question: str, threshold: float = 88.0) -> list[str]:
     q_norm = question.lower()
     matched_entities: list[str] = []
 
-    # 1. Exact regex check for model numbers and hyphenated SKUs
-    # Order patterns such that longer, specific variants (e.g. PKG-120-PRO) precede base variants
-    sorted_catalog = sorted(PRODUCT_CATALOG.items(), key=lambda kv: len(kv[0]), reverse=True)
+    # 1. Exact regex check for model numbers and hyphenated SKUs from catalog
+    active_catalog = get_product_catalog()
+    sorted_catalog = sorted(active_catalog.items(), key=lambda kv: len(kv[0]), reverse=True)
 
     for pid, aliases in sorted_catalog:
         # Check direct substring matching on normalized aliases
@@ -174,6 +198,13 @@ def extract_entities(question: str, threshold: float = 88.0) -> list[str]:
                     if pid not in matched_entities:
                         matched_entities.append(pid)
                     break
+
+    # 2. Generic alphanumeric SKU extraction (e.g., SOLAR-550, P001, ABC-1200)
+    generic_sku_pattern = r"\b[A-Za-z0-9]{2,8}-\d{2,6}(?:-[A-Za-z0-9]+)?\b"
+    for m in re.finditer(generic_sku_pattern, question):
+        candidate_sku = m.group(0).upper()
+        if candidate_sku not in matched_entities:
+            matched_entities.append(candidate_sku)
 
     return matched_entities
 

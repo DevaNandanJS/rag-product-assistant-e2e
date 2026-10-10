@@ -2,6 +2,13 @@
 
 A robust, enterprise-grade Retrieval-Augmented Generation (RAG) assistant designed for B2B industrial equipment catalogs, technical datasheets, operating manuals, and scanned engineering bulletins. Built from scratch with zero high-level RAG frameworks (no LangChain, LlamaIndex, or LiteLLM).
 
+> [!IMPORTANT]
+> **Assessment Reviewer Deliverables & Quick Links:**
+> - 📄 **Official Submission PDF:** [`docs/Filumart_RAG_Assistant_Reviewer_Submission_Package.pdf`](docs/Filumart_RAG_Assistant_Reviewer_Submission_Package.pdf)
+> - 📋 **Full Compliance Audit Report:** [`docs/ASSESSMENT_COMPLIANCE_REPORT.md`](docs/ASSESSMENT_COMPLIANCE_REPORT.md)
+> - 🧪 **Evaluation & Verification Guide:** [`docs/EVALUATION_GUIDE.md`](docs/EVALUATION_GUIDE.md)
+> - 🔍 **Root-Cause Failure Analysis:** [`docs/FAILURE_ANALYSIS.md`](docs/FAILURE_ANALYSIS.md)
+
 ---
 
 ## 1. Quickstart (Production Docker)
@@ -146,6 +153,45 @@ User Query + Optional Filters (Category, Supplier, Country, Product ID)
       └── event: done       (Final status, TTFT, and total generation latency)
 ```
 
+### API Surface & Endpoints
+
+| Method | Endpoint | Description | Payload / Response Contract |
+|---|---|---|---|
+| `POST` | `/ask/stream` | Primary streaming RAG endpoint via Server-Sent Events | `{"query": "...", "filters": {...}}` → SSE tokens, sources, meta |
+| `POST` | `/ask` | Non-streaming endpoint for evaluation and testing | `{"query": "..."}` → JSON answer + sources + latency |
+| `GET` | `/health` | Service and vector database connectivity healthcheck | `{"status": "ok", "vector_db": {...}, "llm": {...}}` |
+| `GET` | `/filters` | Dynamic metadata filter options (categories, suppliers, countries) | `{"categories": [...], "suppliers": [...], ...}` |
+
+### Project Directory Layout
+
+```text
+rag-product-assistant/
+├── app/
+│   ├── api/             # FastAPI routes, lifespan, and SSE event streaming
+│   ├── core/            # Pydantic domain models, schemas, config, and error handlers
+│   ├── ingestion/       # Ingestion orchestrator, normalizers, OCR, and chunkers
+│   ├── retrieval/       # Embedders, hybrid search, RRF fusion, reranker, and gate
+│   ├── generation/      # Prompts, post-check regex verifier, and LLM router
+│   └── evaluation/      # Eval metrics, LLM judge, and ablation runner
+├── data/
+│   ├── raw/             # Catalogs, suppliers, bulletins, text PDFs, and scanned PDFs
+│   └── manifest.json    # Canonical dataset fact manifest
+├── eval/
+│   ├── questions.json   # 40 stratified evaluation benchmark questions
+│   ├── runs/            # Ablation run configs (B0 through B4, final)
+│   └── results/         # Serialized evaluation result JSONs and JSONLs
+├── frontend/            # Vanilla HTML5/CSS3 chat interface and debug drawer
+│   └── vendor/          # Vendored marked.js and DOMPurify (offline, zero-CDN)
+├── docs/                # Build guide, failure analysis, compliance, and PDF deliverable
+├── tests/               # 100% offline pytest test suite
+├── scripts/             # Smoke test, synthetic generator, and PDF build scripts
+├── Dockerfile           # Production container definition (pre-baked models)
+├── docker-compose.yml   # Multi-service stack (App + Qdrant v1.11.3)
+├── main.py              # Root entrypoint for local execution
+├── requirements.txt     # Pinned production dependencies
+└── README.md            # Primary repository documentation
+```
+
 ---
 
 ## 4. Key Design Decisions & Justifications
@@ -213,6 +259,8 @@ python -m app.cli eval --run eval/runs/B4.yaml
 # Run threshold gate calibration sweep
 python -m app.cli eval-gate --min-thresh 0.30 --max-thresh 0.60 --step 0.05
 ```
+
+For a detailed prompt catalogue across all 6 assessment scenarios along with ground truth reference answers and interactive UI verification steps, see [docs/EVALUATION_GUIDE.md](docs/EVALUATION_GUIDE.md).
 
 ---
 
