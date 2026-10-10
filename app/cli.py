@@ -530,7 +530,8 @@ def run_serve(args: argparse.Namespace) -> int:
     port = int(getattr(args, "port", None) or settings.PORT)
     reload = bool(getattr(args, "reload", False))
 
-    print(f"Starting Filumart RAG Assistant on http://{host}:{port}")
+    display_host = "localhost" if host == "0.0.0.0" else host
+    print(f"Starting Filumart RAG Assistant on http://{display_host}:{port} (listening on {host}:{port})")
     uvicorn.run(
         "app.api.app:create_app",
         host=host,

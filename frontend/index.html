@@ -2,10 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filumart Product Assistant</title>
+  <meta name="description" content="AI-powered B2B product knowledge assistant for Filumart industrial catalogs.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Filumart Product Assistant API Server</h1>
-  <p>Backend API operational. Web client interface available in Phase 8.</p>
+  <!-- App Header -->
+  <header id="app-header">
+    <div id="brand">
+      <span id="brand-logo" aria-hidden="true">⚙️</span>
+      <div class="brand-text">
+        <span id="brand-name">Filumart</span>
+        <span id="brand-subtitle">Industrial RAG Assistant</span>
+      </div>
+    </div>
+    <div id="header-controls">
+      <span id="status-badge" class="badge badge-loading" role="status" aria-live="polite">Connecting…</span>
+      <button id="btn-debug-toggle" class="btn btn-secondary" aria-label="Toggle retrieval debug drawer" title="Toggle retrieval debug drawer">
+        <span class="icon">🔍</span> Debug
+      </button>
+      <button id="btn-new-chat" class="btn btn-secondary" aria-label="Start new chat" title="Clear current conversation">
+        <span class="icon">＋</span> New Chat
+      </button>
+    </div>
+  </header>
+
+  <!-- App Layout -->
+  <div id="app-layout">
+    <!-- Left Filter Sidebar -->
+    <aside id="filter-bar" aria-label="Catalog Filters">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Catalog Filters</h2>
+        <button id="btn-reset-filters" class="btn-text" aria-label="Reset all filters">Reset</button>
+      </div>
+      <div class="filter-group">
+        <label for="filter-category">Category</label>
+        <select id="filter-category">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-supplier">Supplier</label>
+        <select id="filter-supplier">
+          <option value="">All Suppliers</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-country">Country</label>
+        <select id="filter-country">
+          <option value="">All Countries</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-product">Product ID</label>
+        <select id="filter-product">
+          <option value="">All Products</option>
+        </select>
+      </div>
+      <div class="filter-tip">
+        <small>💡 Narrow search context by applying explicit catalog filters before asking.</small>
+      </div>
+    </aside>
+
+    <!-- Center Chat Thread Area -->
+    <main id="chat-area">
+      <div id="message-thread" role="log" aria-live="polite" aria-label="Conversation thread">
+        <div class="welcome-card" id="welcome-card">
+          <h3>Welcome to Filumart Product Knowledge Assistant</h3>
+          <p>Ask technical questions, compare models, verify specifications, or inspect supplier terms across packaging, refrigeration, and industrial equipment catalogs.</p>
+          <div class="suggested-prompts">
+            <button class="prompt-chip" data-query="What is the tape width capacity for PKG-120?">PKG-120 tape width capacity</button>
+            <button class="prompt-chip" data-query="Compare packaging machine models and specifications in a table">Compare packaging machines</button>
+            <button class="prompt-chip" data-query="Which chillers use R-410A refrigerant and what is their cooling capacity?">Chillers using R-410A</button>
+          </div>
+        </div>
+      </div>
+      <div id="status-bar" aria-live="assertive" aria-atomic="true"></div>
+    </main>
+
+    <!-- Right Debug Drawer -->
+    <aside id="debug-drawer" class="drawer-hidden" aria-label="Retrieval Debug Inspection">
+      <div class="drawer-header">
+        <h2 class="sidebar-title">Retrieval Debug</h2>
+        <button id="btn-close-debug" class="btn-icon" aria-label="Close debug drawer">&times;</button>
+      </div>
+      <div class="drawer-content">
+        <div id="debug-meta-section" class="debug-card">
+          <h3 class="debug-subtitle">Query Metadata</h3>
+          <div id="debug-meta-body" class="debug-body">No query executed yet.</div>
+        </div>
+        <div id="debug-gate-section" class="debug-card">
+          <h3 class="debug-subtitle">Gate & Routing</h3>
+          <div id="debug-gate-body" class="debug-body">Pending query.</div>
+        </div>
+        <div id="debug-fused-section" class="debug-card">
+          <h3 class="debug-subtitle">RRF Fused Candidates</h3>
+          <div id="debug-fused-body" class="debug-body">No candidates retrieved.</div>
+        </div>
+        <div id="debug-dense-section" class="debug-card">
+          <h3 class="debug-subtitle">Dense Retrieval</h3>
+          <div id="debug-dense-body" class="debug-body">No dense ranks.</div>
+        </div>
+        <div id="debug-sparse-section" class="debug-card">
+          <h3 class="debug-subtitle">BM25 Sparse Retrieval</h3>
+          <div id="debug-sparse-body" class="debug-body">No sparse ranks.</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Bottom Input Bar -->
+  <footer id="input-bar">
+    <div class="input-container">
+      <textarea id="query-input" 
+                placeholder="Ask about products, specs, comparisons, or supplier warranties…"
+                aria-label="Query input"
+                rows="2"
+                maxlength="1000"></textarea>
+      <div id="input-actions">
+        <button id="btn-send" class="btn btn-primary" aria-label="Send query">
+          <span>Send</span> ↵
+        </button>
+        <button id="btn-stop" class="btn btn-danger" aria-label="Stop generation" disabled>
+          <span>Stop</span> ■
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vendored Client Libraries (Pinned, Offline, No External CDN) -->
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+
+  <!-- Modular Scripts -->
+  <script type="module" src="api.js"></script>
+  <script type="module" src="render.js"></script>
+  <script type="module" src="app.js"></script>
+  <!-- Fallback script loader for non-module environments -->
+  <script src="api.js"></script>
+  <script src="render.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

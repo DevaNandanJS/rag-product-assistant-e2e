@@ -104,8 +104,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             if pipeline is not None and app.state.router is not None:
                 service = GenerationService(
                     settings=settings,
-                    retrieval_pipeline=pipeline,
-                    llm_router=app.state.router,
+                    pipeline=pipeline,
+                    router=app.state.router,
                     cache=cache,
                 )
                 app.state.service = service
